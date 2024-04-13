@@ -1,0 +1,50 @@
+.container{
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    height : 100vh;
+}
+
+.container input{
+    height : 2rem;
+    width : 16rem;
+    outline : none;
+}
+
+.container input::placeholder{
+    color : #777777;
+    letter-spacing : 1px;
+}
+
+.container input[type="submit"]{
+    cursor: pointer;
+    color : #ffffff;
+    background-color : #90D26D;
+    width : 16.5rem;
+    height : 2.5rem;
+    border : none;
+    outline : none;
+    font-size : 18px;
+    border-radius : 2px;
+}
+
+.container input[type="submit"]:hover{
+    background-color : #ffffff;
+    color : #90D26D;
+    border : 1px solid #90D26D; 
+    width : 16.5rem;
+    
+    font-size : 18px;
+}
+
+#login_heading{
+    font-family: "Sono", monospace;
+    font-weight : 300;
+    font-size : 5rem;
+    text-align : center;
+}
+
+table{
+ border-collapse: separate;
+ border-spacing: 0 8px;
+}

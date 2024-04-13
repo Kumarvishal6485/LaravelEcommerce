@@ -1,0 +1,82 @@
+.mycarousel {
+    height: 460px;
+}
+
+del {
+    color: #868686;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.category>p {
+    margin-top: 4px;
+}
+
+a {
+    text-decoration-line: none;
+}
+
+.buy-btn {
+    background-color: #dbbb10;
+    color: black;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+.buy-btn:hover {
+    background-color: #dbbb10;
+    color: black;
+    outline: none;
+    border: none;
+}
+
+input {
+    height: 2rem;
+    width: 16rem;
+    outline: none;
+}
+
+input::placeholder {
+    color: #777777;
+    letter-spacing: 1px;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #90D26D;
+    width: 16.5rem;
+    height: 2.5rem;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 2px;
+}
+
+input[type="submit"]:hover {
+    background-color: #ffffff;
+    color: #90D26D;
+    border: 1px solid #90D26D;
+    width: 16.5rem;
+
+    font-size: 18px;
+}
+
+#login_heading {
+    font-family: "Sono", monospace;
+    font-weight: 300;
+    font-size: 5rem;
+    text-align: center;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
