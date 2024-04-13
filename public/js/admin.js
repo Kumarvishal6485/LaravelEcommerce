@@ -94,7 +94,6 @@ $(document).ready(function () {
     //sub category view js ends here
 
     //products view js starts here
-
     function get_categoryy(category_id = 0) {
         id = category_id;
         $.ajax({
