@@ -7,29 +7,6 @@ use Illuminate\Support\Facades\File;
 
 class admin extends Controller
 {
-    function login(Request $r){
-        if(session()->has('username')){
-            return redirect('admin/index');
-        }
-        return view('admin/login');
-    }
-    function logout(Request $r){
-        session()->forget('username');
-        session()->flash('error','Access Denied');
-        return redirect('admin');
-    }
-    
-    function check_user(Request $r){
-        $username = $r['username'];
-        $password = $r['password'];
-        $data = DB::table('admin')->where(array('username'=>$username,'password'=>$password))->get();
-        if(isset($data[0]->username)){
-            session()->put('username',$username);
-            return redirect('admin/index');
-        }
-        return view('admin/login');
-    }
-
     function fetch_categories(Request $r){
         $data = DB::table('category')->paginate(10);
         $data = DB::table('category')->get();

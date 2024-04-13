@@ -4,7 +4,7 @@
 <body>
   <x-navbar />
   <div class="container">
-    <div id="carouselExample" class="carousel slide mt-4">
+    <div id="carouselExample" class="carousel slide">
       <div class="carousel-inner mycarousel">
         <div class="carousel-item ">
           <img

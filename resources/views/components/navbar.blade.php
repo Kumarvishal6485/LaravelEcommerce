@@ -1,6 +1,6 @@
 <div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid ">
     <a class="navbar-brand" href="/">Ecommerce</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,13 +10,14 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+        @if(session()->has('username'))
+          <li><a class="nav-link active" aria-current="page" href="logout">Logout</a></li>
+        
+        @else     
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             User
           </a>
-          @if(session()->has('email'))
-            <li><a class="dropdown-item" href="logout">Logout</a></li>
-          @else     
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" >Login</button></li>
               <li><a class="dropdown-item" href="#">Signup</a></li>

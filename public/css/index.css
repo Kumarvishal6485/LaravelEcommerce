@@ -1,4 +1,8 @@
+#nav-bar{
+    position : fixed !important;
+}
 .mycarousel {
+    margin-top: 6rem;
     height: 460px;
 }
 

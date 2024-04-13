@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\admin;
 use App\http\controllers\Export;
+use App\http\controllers\login;
 
 //admin panel routes starts from here
-Route::get('admin',[admin::class,'login']);
-Route::post('check_user',[admin::class,'check_user']);
+Route::get('admin',[login::class,'login']);
+Route::post('check_user',[login::class,'check_admin']);
 Route::group(['middleware'=>'admin_auth'],function(){
-    Route::get('admin/logout',[admin::class,'logout']);
+    Route::get('admin/logout',[login::class,'logout']);
     Route::get('admin/index',[admin::class,'user']);
     Route::get('admin/categories',[admin::class,'fetch_categories']);
     Route::get('admin/sub_categories',[admin::class,'get_subcategory']);
@@ -37,6 +38,9 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
 
 //website route starts
+Route::get('/googlelogin',[login::class,'googlelogin']);
+Route::get('/auth/google/callback',[login::class,'googleLoginHandler']);
+Route::get('logout',[login::class,'logout_user']);
 Route::view('/','index');
 Route::view('categories','categories');
 Route::view('product','product');
