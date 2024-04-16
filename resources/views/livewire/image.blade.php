@@ -1,0 +1,1 @@
+<img class="card-img-top" src="{{asset('storage/products/'.$image[0]->image)}}" alt="Card image cap">

@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\File;
 class admin extends Controller
 {
     function fetch_categories(Request $r){
-        $data = DB::table('category')->paginate(10);
-        $data = DB::table('category')->get();
+        $data = DB::table('category')->paginate(5);
         return view('admin.categories',array('data' => $data));
     }
 
@@ -59,7 +58,7 @@ class admin extends Controller
     }
 
     function get_users(Request $r){
-        $data = DB::table('admin')->get();
+        $data = DB::table('admin')->paginate(5);
         return view('admin/users',array('data'=>$data));
     }
 
@@ -79,7 +78,7 @@ class admin extends Controller
     }
 
     function get_subcategory(Request $r){
-        $data = DB::table('sub_category')->join('category','category.id','=','sub_category.category')->select('category.category','sub_category.id','sub_category.sub_category')->get();
+        $data = DB::table('sub_category')->join('category','category.id','=','sub_category.category')->select('category.category','sub_category.id','sub_category.sub_category')->paginate(5);
         return view('admin/sub_categories',array('data'=>$data));
     }
 
@@ -106,7 +105,7 @@ class admin extends Controller
     }
 
     function get_products(Request $r){
-        $data = DB::table('product')->join('category','category.id','=','product.cid')->join('sub_category','sub_category.id','=','product.sid')->select('category.category','sub_category.sub_category','product.id','product.product_name','product.status')->get();
+        $data = DB::table('product')->join('category','category.id','=','product.cid')->join('sub_category','sub_category.id','=','product.sid')->select('category.category','sub_category.sub_category','product.id','product.product_name','product.status')->paginate(5);
         return view('admin/products',array('data'=>$data));
     }
 

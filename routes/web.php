@@ -1,9 +1,9 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\admin;
 use App\http\controllers\Export;
 use App\http\controllers\login;
+use livewire\livewire;
 
 //admin panel routes starts from here
 Route::get('admin',[login::class,'login']);
@@ -36,13 +36,15 @@ Route::group(['middleware'=>'admin_auth'],function(){
 });
 //admin panel routes ends here
 
-
 //website route starts
 Route::get('/googlelogin',[login::class,'googlelogin']);
 Route::get('/auth/google/callback',[login::class,'googleLoginHandler']);
+Route::post('/check_users',[login::class,'check_users']);
 Route::get('logout',[login::class,'logout_user']);
 Route::view('/','index');
-Route::view('categories','categories');
+Route::get('sub_categories/{id}',function($id){
+    return view('sub_categories',array('id'=>$id));
+});
 Route::view('product','product');
 Route::view('buy','buy');
 //website route ends

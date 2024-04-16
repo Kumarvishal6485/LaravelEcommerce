@@ -52,5 +52,4 @@ class login extends Controller
         return redirect('/');
     }
 
-
 }

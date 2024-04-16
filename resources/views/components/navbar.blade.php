@@ -11,7 +11,7 @@
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         @if(session()->has('username'))
-          <li><a class="nav-link active" aria-current="page" href="logout">Logout</a></li>
+          <li><a class="nav-link active" aria-current="page" href="{{url('logout')}}">Logout</a></li>
         
         @else     
         <li class="nav-item dropdown">
@@ -41,7 +41,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="check_user" method="post">
+      <form action="check_users" method="post">
             {{@csrf_field()}}
             <table>
                 <tr>

@@ -19,7 +19,7 @@ del {
 }
 
 .category>p {
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
 a {
@@ -83,4 +83,8 @@ input[type="submit"]:hover {
 table {
     border-collapse: separate;
     border-spacing: 0 8px;
+}
+
+.category-images{
+    height : 80px !important;
 }
