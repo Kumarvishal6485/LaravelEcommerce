@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\http\controllers\admin;
 use App\http\controllers\Export;
 use App\http\controllers\login;
+use App\http\controllers\product;
 use livewire\livewire;
 
 //admin panel routes starts from here
@@ -45,6 +46,7 @@ Route::view('/','index');
 Route::get('sub_categories/{id}',function($id){
     return view('sub_categories',array('id'=>$id));
 });
-Route::view('product','product');
+Route::get('product/{pid}',[product::class,'get_product']);
+
 Route::view('buy','buy');
 //website route ends

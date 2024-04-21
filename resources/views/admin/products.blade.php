@@ -19,6 +19,8 @@
           <tr>
             <th>S.No</th>
             <th>Product</th>
+            <th>Price</th>
+            <th>Cost</th>
             <th>Category</th>
             <th>Sub Category</th>
             <th>Status</th>
@@ -31,6 +33,8 @@
           <tr>
             <td>{{++$i}}</td>
             <td>{{$key->product_name}}</td>
+            <td>{{$key->price}}</td>
+            <td>{{$key->cost}}</td>
             <td>{{$key->category}}</td>
             <td>{{$key->sub_category}}</td>
             @if($key->status == 1)
@@ -103,6 +107,24 @@
                   @error('image')
                     {{$message}}
                   @enderror  
+                </span>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Price</label>
+                  <input type="tel" class="form-control" name="price" id="price" rows="3">
+                </div>
+                <span>
+                  @error('price')
+                    {{$message}}
+                  @enderror
+                </span>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Cost</label>
+                  <input type="tel" class="form-control" name="cost" id="cost" rows="3">
+                </div>
+                <span>
+                  @error('cost')
+                    {{$message}}
+                  @enderror
                 </span>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Description</label>
@@ -180,6 +202,24 @@
                   @error('image')
                     {{$message}}
                   @enderror  
+                </span>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Price</label>
+                  <input type="tel" class="form-control" name="price" id="previous_price" rows="3">
+                </div>
+                <span>
+                  @error('price')
+                    {{$message}}
+                  @enderror
+                </span>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Cost</label>
+                  <input type="tel" class="form-control" name="cost" id="previous_cost" rows="3">
+                </div>
+                <span>
+                  @error('cost')
+                    {{$message}}
+                  @enderror
                 </span>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Description</label>

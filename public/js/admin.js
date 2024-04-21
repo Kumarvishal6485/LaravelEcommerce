@@ -196,6 +196,8 @@ $(document).ready(function () {
                 $('#previous_description').val(data['data'][0].description);
                 $('#prev_sub_category_id').val(data['data'][0].sid);
                 $('#prev_category_id').val(data['data'][0].cid);
+                $('#previous_cost').val(data['data'][0].cost);
+                $('#previous_price').val(data['data'][0].price);
                 get_categoryy(data['data'][0].cid);
                 get_sub_category(data['data'][0].cid, true, data['data'][0].sid);
                 $('#edit_category_modal').modal('show');

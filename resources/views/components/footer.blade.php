@@ -1,4 +1,10 @@
 <!-- Footer -->
+@livewireScripts
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <x-livewire-alert::scripts />
+<script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script> 
+<x-livewire-alert::flash />
 <footer class="text-center text-lg-start bg-light text-muted mt-5">
     <!-- Section: Social media -->
     <section class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom">

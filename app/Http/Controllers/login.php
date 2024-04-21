@@ -17,6 +17,9 @@ class login extends Controller
 
     function logout(Request $r){
         session()->forget('username');
+        if(session()->has('user_id')){
+            session()->forget('user_id');
+        }
         session()->flash('error','Access Denied');
         return redirect('admin');
     }
@@ -31,7 +34,7 @@ class login extends Controller
         }
         return view('admin/login');
     }
-
+    
     function googlelogin(Request $r){
         return Socialite::driver('google')->redirect();
     }
@@ -42,12 +45,17 @@ class login extends Controller
         if(!count($data)){
             DB::table('admin')->insert(array('username'=>$user->email,'password' => 'dummy','active_status' => 1 , 'type' => 'U'));
         }
+        $id = DB::table('admin')->where(array('username'=>$user->email ,'active_status' => 1 , 'type' => 'U'))->select('id')->get();
+        session()->put('user_id',$id[0]->id);
         session()->put('username',$user->email);
         return redirect('/');
     }
 
     function logout_user(Request $r){
         session()->forget('username');
+        if(session()->has('user_id')){
+            session()->forget('user_id');
+        }
         session()->flash('error','Access Denied');
         return redirect('/');
     }

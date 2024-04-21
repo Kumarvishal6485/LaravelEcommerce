@@ -1,9 +1,27 @@
 #nav-bar{
     position : fixed !important;
 }
+
+.product_carousel{
+    height: 350px;
+}
+
+.options{
+    display : flex;
+    flex-direction : row;
+    flex-wrap : wrap;
+    margin-bottom : 1rem;
+    gap : 4px 40px;
+}
+
+.productcarousel{
+    margin-top : 6rem;
+    margin-bottom : 2rem;
+}
+
 .mycarousel {
     margin-top: 6rem;
-    height: 460px;
+    height: 460px !important;
 }
 
 del {
@@ -87,4 +105,23 @@ table {
 
 .category-images{
     height : 80px !important;
+}
+
+i{
+    cursor : pointer;
+}
+
+.search-items{
+    display: block;
+}
+
+.search-items{
+    position :absolute;
+    top: 60px;
+}
+
+.search-items{
+    background-color : #ffffff;
+    height: 150px;
+    overflow : scroll;
 }

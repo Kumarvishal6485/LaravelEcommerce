@@ -24,6 +24,7 @@ class admin extends Controller
         $image = $file->getClientOriginalName();
         DB::table('category')->insert(array('category' => $r->category , 'image' => $image , 'description' => $r->description));
         $file->move('storage',$file->getClientOriginalName());
+        session()->flash('message','Category Added Successfully');
         return redirect('admin/categories');
     }
 
@@ -46,6 +47,7 @@ class admin extends Controller
         else{
             DB::table('category')->where(array('id' => $id))->update(array('category' => $r->category , 'description' => $r->description));
         }
+        session()->flash('message','Category Edited Successfully');
         return redirect('admin/categories');
     }
 
@@ -54,6 +56,7 @@ class admin extends Controller
         $data = json_decode($image);
         File::delete('storage/'.$data[0]->image);
         DB::table('category')->where(array('id'=>$r->id))->delete();
+        session()->flash('message','Category Removed Successfully');
         return redirect('admin/categories');
     }
 
@@ -105,7 +108,7 @@ class admin extends Controller
     }
 
     function get_products(Request $r){
-        $data = DB::table('product')->join('category','category.id','=','product.cid')->join('sub_category','sub_category.id','=','product.sid')->select('category.category','sub_category.sub_category','product.id','product.product_name','product.status')->paginate(5);
+        $data = DB::table('product')->join('category','category.id','=','product.cid')->join('sub_category','sub_category.id','=','product.sid')->select('category.category','sub_category.sub_category','product.id','product.product_name','product.status','product.price','product.cost')->paginate(5);
         return view('admin/products',array('data'=>$data));
     }
 
@@ -117,7 +120,7 @@ class admin extends Controller
 
     function add_product(Request $r){
         $status = 1;
-        DB::table('product')->insert(array('cid'=>$r->category , 'sid'=>$r->sub_category , 'product_name'=>$r->product_name,'description'=>$r->description,'status'=>$status));
+        DB::table('product')->insert(array('cid'=>$r->category , 'sid'=>$r->sub_category , 'product_name'=>$r->product_name,'description'=>$r->description,'status'=>$status,'price'=>$r->price,'cost'=>$r->cost));
         $id = DB::table('product')->get()->max('id');
         $images = $r->file('image');
         foreach($images as $image){
@@ -188,10 +191,10 @@ class admin extends Controller
                 $image->move('storage/products/',$image_name);
                 DB::table('images')->insert(array('pid'=>$r->product_id,'image'=>$image_name));
             }
-            DB::table('product')->where(array('cid'=>$r->prev_category_id,'id'=>$r->product_id,'sid'=>$r->prev_sub_category_id))->update(array('cid'=>$r->category,'sid'=>$r->sub_category,'product_name'=>$r->product_name,'description'=>$r->description));
+            DB::table('product')->where(array('cid'=>$r->prev_category_id,'id'=>$r->product_id,'sid'=>$r->prev_sub_category_id))->update(array('cid'=>$r->category,'sid'=>$r->sub_category,'product_name'=>$r->product_name,'description'=>$r->description,'price'=>$r->price,'cost'=>$r->cost));
         }
         else{
-            DB::table('product')->where(array('cid'=>$r->prev_category_id,'id'=>$r->product_id,'sid'=>$r->prev_sub_category_id))->update(array('cid'=>$r->category,'sid'=>$r->sub_category,'product_name'=>$r->product_name,'description'=>$r->description));
+            DB::table('product')->where(array('cid'=>$r->prev_category_id,'id'=>$r->product_id,'sid'=>$r->prev_sub_category_id))->update(array('cid'=>$r->category,'sid'=>$r->sub_category,'product_name'=>$r->product_name,'description'=>$r->description,'price'=>$r->price,'cost'=>$r->cost));
         }
         return redirect('admin/products');   
     }

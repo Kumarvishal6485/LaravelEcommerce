@@ -10,7 +10,13 @@
       <div class="col-lg-10 col-md-10">
         <div class="container-fluid">
         <div class="row mt-5 mb-3">
-      <div class="col-lg-10 col-md-10"></div>
+        <div class="col-lg-2 col-md-2"></div>
+      <div class="col-lg-6 col-md-6">
+      @if(session()->has('message'))
+    <div class="alert alert-success snackbarr">{{session('message') }}</div>
+    @endif
+      </div>
+      <div class="col-lg-2 col-mg-2"></div>
       <div class="col-lg-2 col-md-2"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_category_modal">Add New</button></div>
     </div>
     <div class="row">
@@ -146,5 +152,18 @@
 <!--modal ends  -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="{{asset('js/admin.js')}}"></script>
+<script>
+$(document).ready(function(){
+  @if(session()->has('message'))
+    $('.snackbarr').show(5000);
+    setTimeout(function(){
+      $('.snackbarr').fadeOut();
+    }, 5000);   
+  @else
+    $('.snackbarr').hide();
+  @endif
+})
+  
+</script>
 </body>
 </html>

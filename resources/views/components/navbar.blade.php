@@ -12,7 +12,6 @@
         </li>
         @if(session()->has('username'))
           <li><a class="nav-link active" aria-current="page" href="{{url('logout')}}">Logout</a></li>
-        
         @else     
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,9 +24,7 @@
           @endif
         </li>
       </ul>
-      <span class="d-flex w-50">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      </span>
+        <livewire:Search search=""/>
     </div>
   </div>
 </nav>
