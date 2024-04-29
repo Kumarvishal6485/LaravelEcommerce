@@ -5,10 +5,11 @@ namespace App\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Url;
 
 class Search extends Component
 {
-    #[URL()]
+    #[Url()]
     public $search;
     public $data;
     public function mount($search){

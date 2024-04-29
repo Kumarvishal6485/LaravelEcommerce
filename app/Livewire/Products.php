@@ -47,8 +47,26 @@ class Products extends Component
             }
         }
         else{
-            $this->msg = "Login Required";
-            $this->type = "success";
+            if(!session()->has('cart')){
+                $cart = array($id => 1);
+                $this->msg = "Item Added To Cart";
+                $this->type = "success";
+                session()->put('cart',$cart);
+            }
+            else{
+                $cart = session('cart');
+                if(array_key_exists($id,$cart)){
+                    $this->msg = "Item Already Exist in Cart";
+                    $this->type = "error";
+                }
+                else{
+                    $cart[$id] = 1;
+                    $this->msg = "Item Added To Cart";
+                    $this->type ="success";
+                }
+            }
+            session()->forget('cart');
+            session()->put('cart',$cart);
         }
         $this->alert_message($this->msg,$this->type);
     }
@@ -67,12 +85,27 @@ class Products extends Component
             }
             else{
                 $this->msg = "Item Already Exist in Wishlist";
-                $this->type = "success";
             }
         }
         else{
-            $this->msg = "Login Required";
-            $this->type = "success";
+            if(!session()->has('wishlist')){
+                $wishlist = array($id => 1);
+                $this->msg = "Item Added To Wishlist";
+                $this->type = "success";
+            }
+            else{
+                $wishlist = session('wishlist');
+                if(array_key_exists($id,$wishlist)){
+                    $this->msg = "Item Already Exist in Wishlist";
+                }
+                else{
+                    $wishlist[$id] = 1;
+                    $this->msg = "Item Added To Wishlist";
+                    $this->type ="success";
+                }
+            }
+            session()->forget('wishlist');
+            session()->put('wishlist',$wishlist);
         }
         $this->alert_message($this->msg,$this->type);
     }

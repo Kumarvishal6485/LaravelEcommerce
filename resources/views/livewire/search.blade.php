@@ -5,7 +5,7 @@
             <section>
                 @foreach($this->get_result as $key)
                 <p>
-                    <a href="{{url('products/'.$key->id)}}">{{$key->product_name}}</a>
+                    <a href="{{url('product/'.$key->id)}}">{{$key->product_name}}</a>
                 </p>
                 @endforeach
             </section>

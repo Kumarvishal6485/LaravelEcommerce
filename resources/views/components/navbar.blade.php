@@ -10,6 +10,12 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{url('products')}}">Shop</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{url('cart')}}">Cart</a>
+        </li>
         @if(session()->has('username'))
           <li><a class="nav-link active" aria-current="page" href="{{url('logout')}}">Logout</a></li>
         @else     
@@ -40,7 +46,7 @@
       <div class="modal-body">
       <form action="check_users" method="post">
             {{@csrf_field()}}
-            <table>
+            <table class="login">
                 <tr>
                     <td id="login_heading">Login</td>
                 </tr>

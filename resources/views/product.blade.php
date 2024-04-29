@@ -40,8 +40,8 @@
         <h2>{{$data[0]->product_name}}</h2>
         <h4 class="mt-4">₨ {{$data[0]->price}}&nbsp;<del>₨ {{$data[0]->cost}} </del></h4>
         <div class="container options mt-4">
-        <i class="far fa-heart fa-2x" wire:click.prevent="add_to_wishlist({{$data[0]->id}})" wire:key="{{$data[0]->id}}"></i>
-        <i class="fas fa-cart-plus fa-2x" wire:click.prevent="add_to_cart({{$data[0]->id}})" wire:key="{{$data[0]->id}}"></i>
+        <i class="far fa-heart fa-2x" wire:click.prevent="add_to_wishlist({{$data[0]->id}})" ></i>
+        <i class="fas fa-cart-plus fa-2x" wire:click.prevent="add_to_cart({{$data[0]->id}})" ></i>
         <a href="{{asset('buy/'.$data[0]->id)}}" class="p-2 buy-btn">Buy Now</a>
         </div>
         <div class="accordion" id="accordionExample">

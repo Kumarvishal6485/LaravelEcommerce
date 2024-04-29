@@ -41,12 +41,20 @@ Route::group(['middleware'=>'admin_auth'],function(){
 Route::get('/googlelogin',[login::class,'googlelogin']);
 Route::get('/auth/google/callback',[login::class,'googleLoginHandler']);
 Route::post('/check_users',[login::class,'check_users']);
-Route::get('logout',[login::class,'logout_user']);
+Route::get('/logout',[login::class,'logout_user']);
 Route::view('/','index');
-Route::get('sub_categories/{id}',function($id){
+Route::get('/sub_categories/{id}',function($id){
     return view('sub_categories',array('id'=>$id));
 });
-Route::get('product/{pid}',[product::class,'get_product']);
+Route::get('/product/{pid}',[product::class,'get_product']);
+Route::get('products/{cid}/{sid}',function($category,$sub_category){
+    return view('products',array('cid'=> $category , 'sid' => $sub_category));
+});
 
+Route::get('/products',function($category=0,$sub_category=0){
+    return view('products',array('cid'=> $category , 'sid' => $sub_category));
+});
+
+Route::view('/cart','cart');
 Route::view('buy','buy');
 //website route ends
