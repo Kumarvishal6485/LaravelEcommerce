@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-header/>
+<x-header />
+
 <body>
-  <x-navbar />
-  <div class="container-fluid">
-    <!-- category component  -->
-    <!-- <x-category/> -->
-    <livewire:category data_type="sub_category" id="{{Request()->id}}"/>
-    <!-- category component -->
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <h3 class="p-4">Products For You</h3>
-      </div>
+    <x-navbar />
+    <div class="container-fluid mt-5">
+        
+        <livewire:filters cid="{{Request()->sid}}" sid="{{Request()->cid}}"/>
     </div>
-    <livewire:products cid="{{Request()->id}}">
-  </div>
-  <x-footer/>
+    <!-- Shop End -->
+    <x-footer/>
 </body>
 </html>

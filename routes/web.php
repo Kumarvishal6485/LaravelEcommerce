@@ -34,6 +34,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::post('admin/delete_product_image',[admin::class,'delete_product_image']);
     Route::post('admin/edit_product_details',[admin::class,'edit_product_details']);
     Route::get('admin/product_export',[Export::class,'exports']);
+    Route::view('admin/attributes','admin/attributes');
 });
 //admin panel routes ends here
 
