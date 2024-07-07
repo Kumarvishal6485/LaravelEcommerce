@@ -27,6 +27,7 @@ class Filters extends Component
         $this->orderby = $orderby;
     }
 
+    //alert message function code should be present in only one file  
     public function alert_message($msg,$type = "success"){
         $this->alert($type, $msg , [
             'position' => 'top-end',
