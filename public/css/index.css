@@ -158,3 +158,39 @@ table span{
   .quantity .num{
     font-size: 20px;
   }
+
+  .product-review{
+    display : flex;
+    flex-direction: column;
+    margin-top: 15px !important;
+    border-bottom : 2px solid grey; 
+   }
+   
+   .user-details span{
+        color : #666666;
+        font-size : 19px !important;
+    }
+   .user-details img{
+        height: 30px !important;
+        vertical-align: bottom !important;
+   }
+
+
+   .user-review span{
+        color : black;
+        font-size : 17px ;
+        font-family : 'nunito-sans';
+   }
+
+   .review-form{
+       padding : 14px;
+       background-color : #EBECED;
+       box-shadow: 0px 0px 3px;
+   }
+
+   .checkout-form{
+       display: flex;
+       flex-direction: column;
+       gap: 30px;
+   }
+

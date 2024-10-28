@@ -1,9 +1,12 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\admin;
 use App\http\controllers\Export;
 use App\http\controllers\login;
 use App\http\controllers\product;
+use App\http\controllers\stripe_payment_controller;
+use App\http\controllers\orders;
 use livewire\livewire;
 
 //admin panel routes starts from here
@@ -47,6 +50,7 @@ Route::view('/','index');
 Route::get('/sub_categories/{id}',function($id){
     return view('sub_categories',array('id'=>$id));
 });
+
 Route::get('/product/{pid}',[product::class,'get_product']);
 Route::get('products/{cid}/{sid}',function($category,$sub_category){
     return view('products',array('cid'=> $category , 'sid' => $sub_category));
@@ -58,4 +62,11 @@ Route::get('/products',function($category=0,$sub_category=0){
 
 Route::view('/cart','cart');
 Route::view('buy','buy');
+Route::view('buy/{pid}','checkout');
 //website route ends
+
+//Stripe routes start
+Route::view('/checkout','checkout');
+Route::get('/stripe',[stripe_payment_controller::class,'Stripe']);
+Route::post('/stripe',[stripe_payment_controller::class,'submitStripe']);
+Route::resource('orders');

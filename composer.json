@@ -13,7 +13,8 @@
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "stripe/stripe-php": "^16.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -97,10 +97,19 @@
         @endforeach
         @endif
         <tr>
+          <?php
+            Request()->session()->put('amount',$total);
+          ?>
           <td>Total <span>{{$total}}</span></td>
         </tr>
         <tr>
-          <td><a class="btn btn-success w-100" href="">Checkout</a></td>
+          <td>
+              @if($total != 0)
+                <a class="btn btn-success w-100" href="{{url('checkout')}}">Checkout</a>
+              @else
+                <a class="btn btn-success w-100">Checkout</a>
+              @endif
+            </td>
         </tr>
       </tbody>
     </table>

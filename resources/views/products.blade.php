@@ -5,7 +5,6 @@
 <body>
     <x-navbar />
     <div class="container-fluid mt-5">
-        
         <livewire:filters cid="{{Request()->sid}}" sid="{{Request()->cid}}"/>
     </div>
     <!-- Shop End -->

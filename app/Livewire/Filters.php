@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
+
 
 class Filters extends Component
 {
@@ -36,7 +38,7 @@ class Filters extends Component
         ]);
     }
 
-
+    #[On('add_to_cart')]
     public function add_to_cart($id = NULL){
         if(session()->has('user_id')){
             $this->user_id = session('user_id');
@@ -79,6 +81,7 @@ class Filters extends Component
         $this->alert_message($this->msg,$this->type);
     }
 
+    #[On('add_to_wishlist')]
     public function add_to_wishlist($id = NULL){
         if(session()->has('user_id')){
             $this->user_id = session('user_id');

@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-header />
+<style>
+  #filter-data{
+    display : none !important;
+  }
+</style>
 <body>
   <x-navbar />
-  <div class="container-fluid ">
+  <div class="container-fluid">
     <div class="row productcarousel">
       <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="card">
@@ -40,8 +45,8 @@
         <h2>{{$data[0]->product_name}}</h2>
         <h4 class="mt-4">₨ {{$data[0]->price}}&nbsp;<del>₨ {{$data[0]->cost}} </del></h4>
         <div class="container options mt-4">
-        <i class="far fa-heart fa-2x" wire:click.prevent="add_to_wishlist({{$data[0]->id}})" ></i>
-        <i class="fas fa-cart-plus fa-2x" wire:click.prevent="add_to_cart({{$data[0]->id}})" ></i>
+        <i class="far fa-heart fa-2x" onclick="add_to_wishlist({{$data[0]->id}})" ></i>
+        <i class="fas fa-cart-plus fa-2x" onclick="add_to_cart({{$data[0]->id}})" ></i>
         <a href="{{asset('buy/'.$data[0]->id)}}" class="p-2 buy-btn">Buy Now</a>
         </div>
         <div class="accordion" id="accordionExample">
@@ -66,16 +71,7 @@
                 Reviews
               </button>
             </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse
-                plugin adds the appropriate classes that we use to style each element. These classes control the overall
-                appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with
-                custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go
-                within the <code>.accordion-body</code>, though the transition does limit overflow.
-              </div>
-            </div>
+            <livewire:review pid="{{Request()->pid}}"/>
           </div>
         </div>
       </div>
@@ -88,5 +84,14 @@
     <livewire:products sid="{{$data[0]->sid}}" cid="{{$data[0]->cid}}"/>
   </div>
   <x-footer/>
+  @livewire('Filters')
+  <script>
+       function add_to_wishlist(data){
+          Livewire.dispatch('add_to_wishlist',[data]);
+       }
+       function add_to_cart(data){
+          Livewire.dispatch('add_to_cart',[data]);
+       }
+  </script>
 </body>
 </html>
