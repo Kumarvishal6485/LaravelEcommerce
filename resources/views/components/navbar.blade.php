@@ -16,9 +16,12 @@
         <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="{{url('cart')}}">Cart</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{url('order')}}">Orders</a>  
+        </li>
         @if(session()->has('username'))
           <li><a class="nav-link active" aria-current="page" href="{{url('logout')}}">Logout</a></li>
-        @else     
+        @else
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             User

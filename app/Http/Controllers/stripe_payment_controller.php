@@ -9,7 +9,7 @@ use Stripe\PaymentIntent;
 class stripe_payment_controller extends Controller
 {
     function stripe(Request $r){
-        if($r->session()->has('amount') == 0) return back();  
+        if($r->session()->has('amount') == 0) return back();
         return view('Stripe');
     }
 
@@ -28,6 +28,8 @@ class stripe_payment_controller extends Controller
             'status' => $charge->status,
             'created_at' => date('d-m-Y H:i:s',$charge->created)
         ];
-        return redirect('orders',$transaction_data);
+
+        $request->session()->put('transaction',$transaction_data);        
+        return redirect('orders/create');
     }
 }

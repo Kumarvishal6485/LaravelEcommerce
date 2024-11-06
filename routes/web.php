@@ -69,4 +69,5 @@ Route::view('buy/{pid}','checkout');
 Route::view('/checkout','checkout');
 Route::get('/stripe',[stripe_payment_controller::class,'Stripe']);
 Route::post('/stripe',[stripe_payment_controller::class,'submitStripe']);
-Route::resource('orders');
+Route::resource('orders',orders::class)->only(['index','create','show']);
+Route::view('order','order');
