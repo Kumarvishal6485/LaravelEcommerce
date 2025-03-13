@@ -11,7 +11,7 @@
                   ₨ {{$key->price}}&nbsp;<small><del>₨ {{$key->cost}}</del></small>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5">
-                  <a class="p-2 mb-2 buy-btn" href="buy/{{$key->id}}">Buy Now</a>
+                <a class="p-2 mb-2 buy-btn" href="{{url('buy/'.$key->id)}}">Buy Now</a>
                 </div>
               </div>
               <div class="row">

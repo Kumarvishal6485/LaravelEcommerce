@@ -16,10 +16,8 @@
         <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="{{url('cart')}}">Cart</a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{{url('order')}}">Orders</a>  
-        </li>
         @if(session()->has('username'))
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url('orders')}}">Orders</a></li>
           <li><a class="nav-link active" aria-current="page" href="{{url('logout')}}">Logout</a></li>
         @else
         <li class="nav-item dropdown">
@@ -47,7 +45,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="check_users" method="post">
+      <form action="{{route('submit_login_form')}}" method="POST">
             {{@csrf_field()}}
             <table class="login">
                 <tr>

@@ -7,45 +7,53 @@
       <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-              aria-expanded="true" aria-controls="collapseOne">
+            <button class="accordion-button" type="button">
               Category
             </button>
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
+              <form>
                 @foreach ($categories as $category)
-                <form>
-                    <input type="radio" value_id = "{{$category->id}}" wire:click="getcategories({{$category->id}})"> {{$category->category}} <br>
-                </form>
+                <input type="radio" value="{{ $category->id }}" wire:model.live="category" name="category">
+                  {{$category->category}} <br>
                 @endforeach
+              </form>
             </div>
           </div>
         </div>
       </div>
       @foreach ($attributes as $attribute)
-      <div class="accordion" id="accordionExample">
+    <div class="accordion" id="accordionExample"> <!-- Unified Parent -->
         <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-              aria-expanded="true" aria-controls="collapseOne" wire:click="getvalues({{$attribute->id}})" wire:key="{{$attribute->id}}">
-              {{ucfirst($attribute->attribute)}}
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <form>
-                @foreach($values as $attribute)
-                    <input type="radio" value_id = "{{$attribute->id}}" wire:click="attribute_value_product({{$attribute->id}})"> {{$attribute->value}} <br>
-                @endforeach
-                </form>
+            <h2 class="accordion-header" id="heading{{$attribute->id}}">
+                <button class="accordion-button @if($openAccordion != $attribute->id) collapsed @endif" 
+                    type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#collapse{{$attribute->id}}"
+                    aria-expanded="{{ $openAccordion == $attribute->id ? 'true' : 'false' }}"
+                    aria-controls="collapse{{$attribute->id}}"
+                    wire:click="getvalues({{$attribute->id}})" wire:key="{{$attribute->id}}">
+                    {{ ucfirst($attribute->attribute) }}
+                </button>
+            </h2>
+            <div id="collapse{{$attribute->id}}" 
+                class="accordion-collapse collapse @if($openAccordion == $attribute->id) show @endif"
+                aria-labelledby="heading{{$attribute->id}}"
+                data-bs-parent="#accordionExample"> <!-- Use the same parent ID -->
+                <div class="accordion-body">
+                    <form>
+                        @foreach($values as $val)
+                            <input type="radio" value_id="{{$val->id}}" wire:click="attribute_value_product({{$val->id}})" name="{{$attribute->attribute}}"> 
+                            {{$val->value}} <br>
+                        @endforeach
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      @endforeach
+    </div>
+@endforeach
+
     </div>
   </div>
   <!-- Shop Sidebar End -->
@@ -53,6 +61,7 @@
   <div class="col-lg-10 col-md-12">
     <div class="row pb-3">
       <div class="row mt-2 p-4">
+        @if(count($data))
         @foreach ($data as $key)
         <div class="col-lg-4 col-md-4 col-sm-12" wire:ignore wire:key="product-{{$key->id}}">
           <div class="card mb-3" style="width: 18rem;">
@@ -67,7 +76,7 @@
                     ₨ {{$key->price}}&nbsp;<small><del>₨ {{$key->cost}}</del></small>
                   </div>
                   <div class="col-lg-5 col-md-5 col-sm-5">
-                    <a class="p-2 mb-2 buy-btn" href="buy/{{$key->id}}">Buy Now</a>
+                    <a class="p-2 mb-2 buy-btn" href="{{url('buy/'.$key->id)}}">Buy Now</a>
                   </div>
                 </div>
                 <div class="row">
@@ -86,6 +95,9 @@
           </div>
         </div>
         @endforeach
+        @else
+          <h1>No Product Available for the selected category</h1>
+        @endif
       </div>
     </div>
   </div>

@@ -85,13 +85,13 @@
   </div>
   <x-footer/>
   @livewire('Filters')
-  <script>
-       function add_to_wishlist(data){
-          Livewire.dispatch('add_to_wishlist',[data]);
-       }
-       function add_to_cart(data){
-          Livewire.dispatch('add_to_cart',[data]);
-       }
-  </script>
+<script>
+    function add_to_wishlist(data){
+       Livewire.dispatch('add_to_wishlist',[data]);
+    }
+    function add_to_cart(data){
+       Livewire.dispatch('add_to_cart',[data]);
+    }
+</script>
 </body>
 </html>

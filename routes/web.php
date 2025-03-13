@@ -44,7 +44,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
 //website route starts
 Route::get('/googlelogin',[login::class,'googlelogin']);
 Route::get('/auth/google/callback',[login::class,'googleLoginHandler']);
-Route::post('/check_users',[login::class,'check_users']);
+Route::post('/check_users',[login::class,'check_users'])->name('submit_login_form');
 Route::get('/logout',[login::class,'logout_user']);
 Route::view('/','index');
 Route::get('/sub_categories/{id}',function($id){
@@ -61,13 +61,18 @@ Route::get('/products',function($category=0,$sub_category=0){
 });
 
 Route::view('/cart','cart');
-Route::view('buy','buy');
-Route::view('buy/{pid}','checkout');
+
 //website route ends
 
-//Stripe routes start
-Route::view('/checkout','checkout');
-Route::get('/stripe',[stripe_payment_controller::class,'Stripe']);
-Route::post('/stripe',[stripe_payment_controller::class,'submitStripe']);
-Route::resource('orders',orders::class)->only(['index','create','show']);
-Route::view('order','order');
+Route::group(['middleware' => 'login_checkout'],function(){
+    Route::view('buy','buy');
+    Route::view('buy/{pid}','checkout')->name('buy_now');
+    // Route::get('buy/{pid}', function ($pid) {
+    //     return view('checkout', compact('pid'));
+    // })->name('buy_now');    
+    Route::view('/checkout','checkout');
+    Route::get('/stripe',[stripe_payment_controller::class,'Stripe']);
+    Route::post('/stripe',[stripe_payment_controller::class,'submitStripe']);
+    Route::resource('orders',orders::class)->only(['index','create','show']);
+    Route::view('order','order');
+});

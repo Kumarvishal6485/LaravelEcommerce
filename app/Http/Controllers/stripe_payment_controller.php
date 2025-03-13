@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
+use Stripe\Customer;
 
 class stripe_payment_controller extends Controller
 {
@@ -15,21 +16,40 @@ class stripe_payment_controller extends Controller
 
     function submitStripe(Request $request){
         Stripe::setApiKey(env('STRIPE_SECRET'));
-        $charge = PaymentIntent::create([
-            'amount' => $request->session()->get('amount'),
-            'currency' => 'inr',
-            'payment_method_types' => ['card'],
-            'description' => 'Order'
+    
+        // Create Customer
+        $customer = Customer::create([
+            'name' => 'Vishal Kumar',
+            'email' => 'kumarvishal6485@gmail.com'
         ]);
-
-        $transaction_data = [
-            'amount' => $charge->amount,
-            'referece_id' => $charge->id,
-            'status' => $charge->status,
-            'created_at' => date('d-m-Y H:i:s',$charge->created)
-        ];
-
-        $request->session()->put('transaction',$transaction_data);        
-        return redirect('orders/create');
-    }
+        $customerId = $customer->id;
+    
+        // Create PaymentIntent
+        $paymentIntent = PaymentIntent::create([
+            'amount' => $request->session()->get('amount'),
+            'currency' => 'INR',
+            'description' => 'Order',
+            'customer' => $customerId,
+            'payment_method' => 'pm_card_visa',
+            'confirm' => true,
+            'return_url' => url('orders')
+        ]);
+    
+        if ($paymentIntent->status === 'succeeded') {
+            // Store transaction details in session
+            $transaction_data = [
+                'amount' => $paymentIntent->amount,
+                'reference_id' => $paymentIntent->id,
+                'status' => $paymentIntent->status,
+                'created_at' => date('d-m-Y H:i:s', $paymentIntent->created)
+            ];
+    
+            $request->session()->put('transaction', $transaction_data);
+    
+            // Redirect to order creation page after successful payment
+            return redirect('orders/create');
+        } else {
+            return back()->with('error', 'Payment failed! Try again.');
+        }
+    }    
 }

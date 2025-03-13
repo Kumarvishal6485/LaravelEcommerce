@@ -194,3 +194,37 @@ table span{
        gap: 30px;
    }
 
+   fieldset{
+        border: 1px solid #000000;
+   }
+
+   .order-details{
+        border-left : 2px solid #777777;
+        padding : 1rem;
+   }
+
+   .order-container{
+        padding-top: 2rem;
+   }
+
+   .product-link{
+        font-size : 23px;
+   }
+
+   .ordered-product-image img{
+        height: 150px;
+        border : 1px solid silver;
+   }
+
+   .ordered-products{
+        display : flex;
+        flex-direction : row;
+   }
+
+   .ordered-product-detail{
+        padding : 1rem;
+   }
+
+   .ordered_product_list{
+        display: block;
+   }

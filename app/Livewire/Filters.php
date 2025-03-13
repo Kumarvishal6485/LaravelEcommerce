@@ -7,15 +7,15 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 
-
 class Filters extends Component
 {
     use LivewireAlert;
+    public $data = [];
     public $user_id;
     public $quantity = NULL;
-    public $category;
-    public $sub_category;
-    public $orderby;
+    public $category = NULL;
+    public $sub_category = NULL;
+    public $orderby = "ASC";
     public $type = "error";
     public $msg = "Can't Proceed Further";
     public $att_values = NULL;
@@ -23,9 +23,11 @@ class Filters extends Component
     public $color = NULL;
     public $size = NULL;
     public $att_val_id = NULL;
+    public $openAccordion = NULL;
+
     public function mount($cid = NULL,$sid = NULL,$orderby = "ASC"){
         $this->category = $cid;
-        $this->sub_category = $sid;    
+        $this->sub_category = $sid;   
         $this->orderby = $orderby;
     }
 
@@ -121,12 +123,9 @@ class Filters extends Component
         $this->alert_message($this->msg,$this->type);
     }
 
-    public function getcategories($cid){
-        $this->category = $cid;
-    }
-
     public function getvalues($attribute_id = NULL){
         $this->att_id = $attribute_id;
+        $this->openAccordion = $attribute_id;
     }
 
     public function attribute_value_product($attribute_value = NULL){
@@ -135,7 +134,6 @@ class Filters extends Component
 
     public function render()
     {   
-        
         $attributes = DB::table('attributes')->select('id','attribute')->get();
         $categories = DB::table('category')->select('id','category')->get();
         if($this->att_id != NULL){
@@ -144,29 +142,23 @@ class Filters extends Component
         else{
             $att_values = [];
         }
-        if($this->category != NULL && $this->sub_category != NULL && $this->color == NULL && $this->size == NULL && $this->att_val_id == NULL){
-            $data = DB::table('product')
+
+        if($this->category != NULL ){
+            $this->data = DB::table('product')
             ->join('category', 'category.id', '=', 'product.cid')
             ->join('sub_category', 'sub_category.id', '=', 'product.sid')
             ->where(function($query) {
                 $query->where('product.sid', $this->sub_category)
-                      ->where('product.cid', $this->category);
+                      ->orwhere('product.cid', $this->category);
             })
             ->select('category.category', 'sub_category.sub_category', 'product.id', 'product.product_name', 'product.status', 'product.price', 'product.cost')
             ->limit(8)
             ->get();
-            $this->category = NULL;
-            $this->category = NULL;
-        }
-        else if($this->category != NULL || $this->sub_category != NULL || $this->color != NULL || $this->size != NULL || $this->att_val_id != NULL){
-            $data = DB::table('product')->join('category', 'category.id', '=', 'product.cid')->join('sub_category', 'sub_category.id', '=', 'product.sid')->join('product_attribute_selected','product.id','=','product_attribute_selected.product_id')->where(function($query) {
-              $query->where('product.sid', $this->sub_category)->orWhere('product.cid', $this->category)->orWhere('product_attribute_selected.attribute_value',$this->att_val_id);
-            })->select('category.category', 'sub_category.sub_category', 'product.id', 'product.product_name', 'product.status', 'product.price', 'product.cost')->limit(8)->get();
         }
         else{
-            $data = DB::table('product')->join('category','category.id','=','product.cid')->join('sub_category','sub_category.id','=','product.sid')->select('category.category','sub_category.sub_category','product.id','product.product_name','product.addedon','product.status','product.price','product.cost')->limit(8)->orderBy('product.addedon',$this->orderby)->get();
+            $this->data = DB::table('product')->join('category','category.id','=','product.cid')->join('sub_category','sub_category.id','=','product.sid')->select('category.category','sub_category.sub_category','product.id','product.product_name','product.addedon','product.status','product.price','product.cost')->limit(8)->orderBy('product.addedon',$this->orderby)->get();
         }
-
-        return view('livewire.filters',array('categories'=>$categories,'data'=>$data , 'attributes'=>$attributes ,'values'=>$att_values));
+        
+        return view('livewire.filters',array('categories'=>$categories,'data'=>$this->data , 'attributes'=>$attributes ,'values'=>$att_values,'attribute_selected'=>$this->att_val_id));
     }
 }
