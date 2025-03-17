@@ -1,7 +1,5 @@
 <div class="row" id="filter-data">
-  <!-- Shop Sidebar Start -->
   <div class="col-lg-2 col-md-12 border mt-3 p-2">
-    <!-- Price Start -->
     <center><h4>Filter By</h4></center>
     <div class="">
       <div class="accordion" id="accordionExample">
@@ -25,7 +23,7 @@
         </div>
       </div>
       @foreach ($attributes as $attribute)
-    <div class="accordion" id="accordionExample"> <!-- Unified Parent -->
+    <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="heading{{$attribute->id}}">
                 <button class="accordion-button @if($openAccordion != $attribute->id) collapsed @endif" 
@@ -40,12 +38,12 @@
             <div id="collapse{{$attribute->id}}" 
                 class="accordion-collapse collapse @if($openAccordion == $attribute->id) show @endif"
                 aria-labelledby="heading{{$attribute->id}}"
-                data-bs-parent="#accordionExample"> <!-- Use the same parent ID -->
+                data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form>
                         @foreach($values as $val)
-                            <input type="radio" value_id="{{$val->id}}" wire:click="attribute_value_product({{$val->id}})" name="{{$attribute->attribute}}"> 
-                            {{$val->value}} <br>
+                            <input type="radio" value_id="{{$attribute->id}}/{{$val->id}}" wire:click="attribute_value_product('{{$attribute->id}}/{{$val->id}}')" name="{{$attribute->attribute}}"> 
+                            {{$val->value}} <br> 
                         @endforeach
                     </form>
                 </div>
@@ -53,7 +51,6 @@
         </div>
     </div>
 @endforeach
-
     </div>
   </div>
   <!-- Shop Sidebar End -->
