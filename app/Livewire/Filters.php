@@ -134,7 +134,7 @@ class Filters extends Component
         $categories = DB::table('category')->select('id', 'category')->get();
         $att_values = $this->att_id ? DB::table('attribute_values')->where(['attribute_id' => $this->att_id])->get() : [];
 
-            if (!count($this->attribute_selected)) {
+            if (!count($this->attribute_selected) && $this->category != NULL) {
                 $this->data = DB::table('product')
                 ->join('category', 'category.id', '=', 'product.cid')
                 ->join('sub_category', 'sub_category.id', '=', 'product.sid')
@@ -145,32 +145,29 @@ class Filters extends Component
                 ->select('category.category', 'sub_category.sub_category', 'product.id', 'product.product_name', 'product.status', 'product.price', 'product.cost')->get();
             } elseif (count($this->attribute_selected)) {
                 $this->data = DB::table('product')
-                            ->join('category', 'category.id', '=', 'product.cid')
-                            ->join('sub_category', 'sub_category.id', '=', 'product.sid')
-                            ->where(function ($query) {
-                                $query->where('product.sid', $this->sub_category)
-                                      ->orWhere('product.cid', $this->category)
-                                      ->orWhere(function ($query) {
-                                          foreach ($this->attribute_selected as $attribute => $value) {
-                                              $query->orWhere('product.Variations', 'like', "%{$attribute}:{$value}%");
-                                          }
-                                      });
-                            })
-                            ->select(
-                                'category.category',
-                                'sub_category.sub_category',
-                                'product.id',
-                                'product.product_name',
-                                'product.status',
-                                'product.price',
-                                'product.cost',
-                                'attributes.id as attribute_id',
-                                'attribute_values.id as attribute_value_id'
-                            )
-                            ->get();
-                dd($this->data);
+                ->join('category', 'category.id', '=', 'product.cid')
+                ->join('sub_category', 'sub_category.id', '=', 'product.sid')
+                ->where(function ($query) {
+                    $query->where('product.sid', $this->sub_category)
+                          ->orWhere('product.cid', $this->category)
+                          ->orWhere(function ($query) {
+                              foreach ($this->attribute_selected as $attribute => $value) {
+                                  $query->orWhere('product.Variations', 'like', "%{$attribute}:{$value}%");
+                              }
+                          });
+                })
+                ->select(
+                    'category.category',
+                    'sub_category.sub_category',
+                    'product.id',
+                    'product.product_name',
+                    'product.status',
+                    'product.price',
+                    'product.cost'
+                )
+                ->get();
             } else {
-            $this->data = DB::table('product')
+                $this->data = DB::table('product')
                 ->join('category', 'category.id', '=', 'product.cid')
                 ->join('sub_category', 'sub_category.id', '=', 'product.sid')
                 ->select('category.category', 'sub_category.sub_category', 'product.id', 'product.product_name', 'product.addedon', 'product.status', 'product.price', 'product.cost')
