@@ -33,7 +33,6 @@ $(document).ready(function () {
 
 
     //sub category view js starts here
-
     function get_category() {   //function to fetch all categories
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

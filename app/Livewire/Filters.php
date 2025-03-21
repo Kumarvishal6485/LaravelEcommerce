@@ -143,6 +143,7 @@ class Filters extends Component
                     ->orWhere('product.cid', $this->category);
                 })
                 ->select('category.category', 'sub_category.sub_category', 'product.id', 'product.product_name', 'product.status', 'product.price', 'product.cost')->get();
+
             } elseif (count($this->attribute_selected)) {
                 $this->data = DB::table('product')
                 ->join('category', 'category.id', '=', 'product.cid')
@@ -166,6 +167,7 @@ class Filters extends Component
                     'product.cost'
                 )
                 ->get();
+
             } else {
                 $this->data = DB::table('product')
                 ->join('category', 'category.id', '=', 'product.cid')
@@ -174,6 +176,7 @@ class Filters extends Component
                 ->limit(8)
                 ->orderBy('product.addedon', $this->orderby)
                 ->get();
+                
             }
 
         return view('livewire.filters', [

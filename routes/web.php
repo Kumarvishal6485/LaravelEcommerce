@@ -7,6 +7,7 @@ use App\http\controllers\login;
 use App\http\controllers\product;
 use App\http\controllers\stripe_payment_controller;
 use App\http\controllers\orders;
+use App\http\controllers\attributes;
 use livewire\livewire;
 
 //admin panel routes starts from here
@@ -37,7 +38,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::post('admin/delete_product_image',[admin::class,'delete_product_image']);
     Route::post('admin/edit_product_details',[admin::class,'edit_product_details']);
     Route::get('admin/product_export',[Export::class,'exports']);
-    Route::view('admin/attributes','admin/attributes');
+    Route::get('admin/attributes',[attributes::class,'fetchAttributes']);
+    Route::get('admin/add_attribute',[attributes::class,'addAttribute']);
 });
 //admin panel routes ends here
 
@@ -67,9 +69,11 @@ Route::view('/cart','cart');
 Route::group(['middleware' => 'login_checkout'],function(){
     Route::view('buy','buy');
     Route::view('buy/{pid}','checkout')->name('buy_now');
-    // Route::get('buy/{pid}', function ($pid) {
-    //     return view('checkout', compact('pid'));
-    // })->name('buy_now');    
+    /*
+        Route::get('buy/{pid}', function ($pid) {
+            return view('checkout', compact('pid'));
+        })->name('buy_now');
+    */    
     Route::view('/checkout','checkout');
     Route::get('/stripe',[stripe_payment_controller::class,'Stripe']);
     Route::post('/stripe',[stripe_payment_controller::class,'submitStripe']);

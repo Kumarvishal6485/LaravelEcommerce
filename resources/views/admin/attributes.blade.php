@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-header />
-<meta name="csrf-token" content="{{csrf_token()}}">
-
 <body>
   <div class="container-fluid">
     <x-admin_header />
@@ -11,26 +9,33 @@
       <div class="col-lg-10 col-md-10">
         <div class="container-fluid">
           <div class="row mt-5 mb-3">
+            @if(session()->has('message'))
+              <div class="alert alert-success snackbarr">{{session('message') }}</div>
+            @endif
             <div class="col-lg-10 col-md-6"></div>
-            <div class="col-lg-2 col-md-6"><button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            <div class="col-lg-2 col-md-6">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#add_attribute">Add New</button></div>
           </div>
           <div class="row">
             <div class="col-lg-12 col-md-12">
               <table class="table table-light">
                 <tr>
+                  <?php 
+                    $i = 0;
+                  ?>
                   <th>S.No</th>
                   <th>Attributes</th>
                   <th>Values</th>
+                  <th>Actions</th>
                 </tr>
+                @foreach($data as $attribute)
                 <tr>
-                  <th>1</th>
-                  <th>Color</th>
-                  <th>
-
-                  </th>
+                  <th>{{++$i}}</th>
+                  <th>{{$attribute->attribute}}</th>
+                  <th><a class="btn btn-dark" id="{{$attribute->id}}" href="{{url('admin/edit_attribute')}}">Edit</a><a class="btn btn-danger" id="{{$attribute->id}}" href="{{url('admin/delete_attribute')}}">Delete</a></th>
                 </tr>
-
+                @endforeach
               </table>
             </div>
           </div>
@@ -48,22 +53,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="add_attribute" method="POST" enctype="multipart/form-data">
+          <form action="add_attribute" method="GET">
             {{csrf_field()}}
             <div class="form-group">
-              <label for="exampleFormControlInput1">Select Attribute</label><br>
-              <select name="attribute" id="attribute" required>
-                <option selected>Select</option>
-              </select>
-            </div>
-            <span>
-              @error('category')
-              {{$message}}
-              @enderror
-            </span>
-            <div class="form-group">
               <label for="exampleFormControlInput1">New Attribute</label><br>
-              <input type="text" placeholder="Enter Attribute Title" name="attribute_new">
+              <input type="text" placeholder="Enter Attribute Title" name="attribute" required>
             </div>
             <span>
               @error('attribute_new')
