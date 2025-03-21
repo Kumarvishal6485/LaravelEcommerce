@@ -15,7 +15,7 @@ class attributes extends Controller
 
     function fetchAttributes(Request $r)
     {
-        $data = DB::table('attributes')->select('id','attribute')->get();
+        $data = DB::table('attributes')->select('id','attribute')->get();   
         return view('admin/attributes',['data'=>$data]);
     }
 }
