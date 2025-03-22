@@ -15,7 +15,13 @@ class attributes extends Controller
 
     function fetchAttributes(Request $r)
     {
-        $data = DB::table('attributes')->select('id','attribute')->get();   
+        $data = DB::table('attributes')->select('id','attribute')->get(); 
         return view('admin/attributes',['data'=>$data]);
+    }
+
+    function removeAttributeValue(Request $r) 
+    {
+        DB::table('attribute_values')->where(['id'=>$r->id])->delete();
+        return redirect('admin/attributes');
     }
 }

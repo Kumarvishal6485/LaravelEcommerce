@@ -181,6 +181,7 @@ class Filters extends Component
 
         return view('livewire.filters', [
             'categories' => $categories,
+            'p_category' => $this->category,
             'data' => $this->data,
             'attributes' => $attributes,
             'values' => $att_values,

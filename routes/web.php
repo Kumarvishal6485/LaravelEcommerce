@@ -40,6 +40,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/product_export',[Export::class,'exports']);
     Route::get('admin/attributes',[attributes::class,'fetchAttributes']);
     Route::get('admin/add_attribute',[attributes::class,'addAttribute']);
+    Route::get('admin/remove_att_val/{id}',[attributes::class,'removeAttributeValue']);
 });
 //admin panel routes ends here
 
@@ -65,7 +66,6 @@ Route::get('/products',function($category=0,$sub_category=0){
 Route::view('/cart','cart');
 
 //website route ends
-
 Route::group(['middleware' => 'login_checkout'],function(){
     Route::view('buy','buy');
     Route::view('buy/{pid}','checkout')->name('buy_now');

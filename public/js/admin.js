@@ -1,4 +1,15 @@
 $(document).ready(function () {
+    function hideLiwewireInput() {
+        $('.livewire-att-input').hide();
+        $('.livewire-att-input').val("");
+    }
+
+    hideLiwewireInput();
+
+    function showAddBtn(id){
+        $(`.add_val_${id}`).show();
+    }
+
     //categories
     $(document).on('click', '#edit_category', function (e) {
         $('#category_new_image').hide();
@@ -249,5 +260,12 @@ $(document).ready(function () {
                 $('#product_images').html(image_html);
             }
         })
+    })
+
+    $(document).on('click','#attribute_val',function (e){
+        var id = $(e.currentTarget).attr('attribute_id');
+        $(`#livewire-att-val-${id}`).show();
+        $(`#livewire-att-val-${id}`).val("");
+        $(e.currentTarget).hide();
     })
 })

@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-header />
+<style>
+  .attribute_value{
+    padding : 3px !important;
+    background-color : #0000001f;
+    border-radius : 5px;
+    margin : 2px;
+  }
+
+  .attribute_value a{
+    padding-left : 10px !important;
+  }
+</style>
 <body>
   <div class="container-fluid">
     <x-admin_header />
@@ -33,6 +45,10 @@
                 <tr>
                   <th>{{++$i}}</th>
                   <th>{{$attribute->attribute}}</th>
+                  <th>
+                    <livewire:Att-value att_id="{{$attribute->id}}"/>
+                    <button id="attribute_val" class="btn btn-secondary" class="add_val_{{$attribute->id}}" id="add_attribute_value" attribute_id="{{$attribute->id}}">+</button>
+                  </th>
                   <th><a class="btn btn-dark" id="{{$attribute->id}}" href="{{url('admin/edit_attribute')}}">Edit</a><a class="btn btn-danger" id="{{$attribute->id}}" href="{{url('admin/delete_attribute')}}">Delete</a></th>
                 </tr>
                 @endforeach
@@ -137,5 +153,4 @@
   <!--modal ends  -->
   <script src="{{asset('js/admin.js')}}"></script>
 </body>
-
 </html>
