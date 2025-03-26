@@ -48,3 +48,14 @@ table{
  border-collapse: separate;
  border-spacing: 0 8px;
 }
+
+.attribute_value{
+    padding : 3px !important;
+    background-color : #0000001f;
+    border-radius : 5px;
+    margin : 2px;
+}
+
+.attribute_value a{
+    padding-left : 10px !important;
+}

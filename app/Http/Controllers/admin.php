@@ -118,9 +118,29 @@ class admin extends Controller
         return response()->json($data);
     }
 
+    function getVariationString() {
+        $variation_str = "";
+        if (session()->has('attributes')) {
+            $variations_arr = session()->get('attributes');
+            session()->forget('attributes');
+            $variation_str = "{";
+            foreach ($variations_arr as $key => $value) {
+                foreach ($value as $element) {
+                    $variation_str .= $key.":".$element.","; 
+                }
+            }
+            if (strlen($variation_str) > 1) {
+                $variation_str[strlen($variation_str)-1] = "}";
+            }
+        }
+
+        return $variation_str;
+    }
+
     function add_product(Request $r){
+        $variation_str = $this->getVariationString();
         $status = 1;
-        DB::table('product')->insert(array('cid'=>$r->category , 'sid'=>$r->sub_category , 'product_name'=>$r->product_name,'description'=>$r->description,'status'=>$status,'price'=>$r->price,'cost'=>$r->cost));
+        DB::table('product')->insert(array('cid'=>$r->category , 'sid'=>$r->sub_category , 'product_name'=>$r->product_name,'description'=>$r->description,'status'=>$status,'price'=>$r->price,'cost'=>$r->cost,'Variations'=>$variation_str));
         $id = DB::table('product')->get()->max('id');
         $images = $r->file('image');
         foreach($images as $image){
@@ -184,6 +204,7 @@ class admin extends Controller
     }
 
     function edit_product_details(Request $r){
+        $variation_str = $this->getVariationString();
         if($r->hasFile('image')){
             $images = $r->file('image');
             foreach($images as $image){
@@ -191,10 +212,10 @@ class admin extends Controller
                 $image->move('storage/products/',$image_name);
                 DB::table('images')->insert(array('pid'=>$r->product_id,'image'=>$image_name));
             }
-            DB::table('product')->where(array('cid'=>$r->prev_category_id,'id'=>$r->product_id,'sid'=>$r->prev_sub_category_id))->update(array('cid'=>$r->category,'sid'=>$r->sub_category,'product_name'=>$r->product_name,'description'=>$r->description,'price'=>$r->price,'cost'=>$r->cost));
+            DB::table('product')->where(array('cid'=>$r->prev_category_id,'id'=>$r->product_id,'sid'=>$r->prev_sub_category_id))->update(array('cid'=>$r->category,'sid'=>$r->sub_category,'product_name'=>$r->product_name,'description'=>$r->description,'price'=>$r->price,'cost'=>$r->cost,'variations'=>$variation_str));
         }
         else{
-            DB::table('product')->where(array('cid'=>$r->prev_category_id,'id'=>$r->product_id,'sid'=>$r->prev_sub_category_id))->update(array('cid'=>$r->category,'sid'=>$r->sub_category,'product_name'=>$r->product_name,'description'=>$r->description,'price'=>$r->price,'cost'=>$r->cost));
+            DB::table('product')->where(array('cid'=>$r->prev_category_id,'id'=>$r->product_id,'sid'=>$r->prev_sub_category_id))->update(array('cid'=>$r->category,'sid'=>$r->sub_category,'product_name'=>$r->product_name,'description'=>$r->description,'price'=>$r->price,'cost'=>$r->cost,'variations'=>$variation_str));
         }
         return redirect('admin/products');   
     }

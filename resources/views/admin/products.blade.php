@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-header/>
+<link rel="stylesheet" href="{{asset('css/admin.css')}}">
 <meta name="csrf-token" content="{{csrf_token()}}">
 <body>
 <div class="container-fluid">
@@ -108,6 +109,7 @@
                     {{$message}}
                   @enderror  
                 </span>
+                <livewire:productattr/>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Price</label>
                   <input type="tel" class="form-control" name="price" id="price" rows="3">
@@ -203,6 +205,7 @@
                     {{$message}}
                   @enderror  
                 </span>
+                <livewire:productattr/>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Price</label>
                   <input type="tel" class="form-control" name="price" id="previous_price" rows="3">

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-header/>
+<link rel="stylesheet" href="{{asset('css/admin.css')}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <body>
 <div class="container-fluid">

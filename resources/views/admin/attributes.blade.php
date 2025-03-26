@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-header />
-<style>
-  .attribute_value{
-    padding : 3px !important;
-    background-color : #0000001f;
-    border-radius : 5px;
-    margin : 2px;
-  }
-
-  .attribute_value a{
-    padding-left : 10px !important;
-  }
-</style>
+<x-header/>
+<link rel="stylesheet" href="{{asset('css/admin.css')}}">
 <body>
   <div class="container-fluid">
     <x-admin_header />
