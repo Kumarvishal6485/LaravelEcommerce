@@ -17,19 +17,19 @@
         </select>
     @endif
     <br>
-    @if (count($att_val) && session()->has('attributes'))
+    @if (count($sel_att_val) && session()->has('attributes'))
         @foreach ($sel_att_val as $key => $val)
-            <?php 
+        <?php 
                 $legend_created = true;
-            ?>
+                ?>
             <fieldset>
                 @foreach ($val as $value) 
-                    <?php 
+                    <?php
                         $current_attr = $key;
-                        $current_val = $value;   
-                        ?>
+                        $current_val = $value;
+                    ?>
                     @foreach ($att_vals as $attr)
-                    @if ($current_attr == $attr->a_id && $current_val == $attr->v_id)
+                        @if ($current_attr == $attr->a_id && $current_val == $attr->v_id)
                             @if ($legend_created)
                                 <legend>{{ucfirst($attr->attribute)}}</legend>
                                 <?php 
@@ -42,5 +42,5 @@
                 @endforeach
             </fieldset>
         @endforeach
-    @endif 
+    @endif
 </div>

@@ -43,7 +43,7 @@
             @elseif($key->status==0)
                 <td><a class="btn btn-dark">Out of Stock</a></td>
             @endif
-            <td><a class="btn btn-primary" id="edit_category" id_val="{{$key->id}}" >Edit</a><a class="btn btn-danger" href="{{ url('admin/delete_product/' . $key->id) }}">Delete</a></td>
+            <td><a class="btn btn-primary" id="edit_productt" id_val="{{$key->id}}" >Edit</a><a class="btn btn-danger" href="{{ url('admin/delete_product/' . $key->id) }}">Delete</a></td>
           </tr>
           @endforeach
         </table>   
@@ -241,6 +241,11 @@
   </div>
 </div>
 <!--modal ends  -->
+<script>
+   function selected_product_variations(data){
+       Livewire.dispatch('edit_product_variations',[data]);
+   }
+</script>
 <script src="{{asset('js/admin.js')}}"></script>
 </body>
 </html>

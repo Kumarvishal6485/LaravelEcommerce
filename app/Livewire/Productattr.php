@@ -4,6 +4,7 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Persist;
+use Livewire\Attributes\On;
 
 class Productattr extends Component
 {
@@ -38,6 +39,28 @@ class Productattr extends Component
         }
     }
 
+    #[On('edit_product_variations')]
+    public function edit_product_variations($data) {
+        $str = $data;
+        if (strlen($str) > 2) {
+            $length = strlen($str) - 1;
+            $str = substr($str, 1, $length-2);
+            while(preg_match("/(.*?),/s", $str, $matches)) {
+                $att_val = substr($matches[0],0,strlen($matches[0])-1);
+                $str = substr($str, strlen($matches[0]), strlen($str));
+                $key = (int)substr($att_val, 0, strpos($att_val,":"));
+                $value = (int)substr($att_val,strpos($att_val,":")+1,);
+                $this->att_val[$key][] = $value;
+            }
+            if (strlen($str)) {
+                $key = (int)substr($str, 0, strpos($str,":"));
+                $value = (int)substr($str,strpos($str,":")+1,);
+                $this->att_val[$key][] = $value;
+            }
+        }
+        $this->fetch_all_attribute_value();
+    }
+
     public function fetchAttrVal($val_id = NULL, $att_id = NULL){
         if (!isset($this->att_val[$att_id])) {
             $this->att_val[$att_id] = [];
@@ -50,13 +73,15 @@ class Productattr extends Component
 
     public function render()
     {
+
         $this->fetchAttributes();
         if ($this->attribute != NULL) {
             $this->value = DB::table('attribute_values')->where(['attribute_id'=>$this->attribute])->select('id','value')->get();
         }
+
         if (count($this->att_val)) {
             session()->put('attributes',$this->att_val);
-        } elseif (count($this->att_val) == 0) {
+        } elseif (count($this->att_val) == 0) { 
             session()->forget('attributes');
         }
 

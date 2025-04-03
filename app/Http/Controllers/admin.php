@@ -190,7 +190,11 @@ class admin extends Controller
         $id = $r->id;
         $data = DB::table('product')->where(array('id'=>$id))->get();
         $images = DB::table('images')->where(array('pid'=>$id))->get();
-        return response()->json(array('data'=>$data,'images'=>$images));
+        session()->put('attributes',$data);
+        // session()->put('edit_product',true);
+        $str = $data[0]->Variations;
+        
+        return response()->json(array('data'=>$data,'images'=>$images,'attributesVar'=>$str));
     }
 
     public static function delete_product_image(Request $r){

@@ -24,9 +24,7 @@ $(document).ready(function () {
                 'id': id
             },
             success: function (data) {
-                //data = JSON.parse(data);
                 const obj = data[0];
-                console.log(obj);
                 $('#edit_category_modal').modal('show');
                 $('#id_input').val(obj.id);
                 $('#category_input').val(obj.category);
@@ -189,7 +187,7 @@ $(document).ready(function () {
         get_sub_category(cid, iscategory, 0);
     })
 
-    $(document).on('click', '#edit_category', function (e) {
+    $(document).on('click', '#edit_productt', function (e) {
         $('#add_new').hide();
         var id = this.getAttribute('id_val');
         $.ajax({
@@ -201,6 +199,8 @@ $(document).ready(function () {
                 'id': id
             },
             success: function (data) {
+                console.log(typeof(data['data'][0].Variations))
+                selected_product_variations(data['data'][0].Variations);
                 $('#product_iddd').val(data['data'][0].id);
                 $('#previous_product').val(data['data'][0].product_name);
                 $('#previous_description').val(data['data'][0].description);
