@@ -13,13 +13,13 @@
       <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="card">
           <!-- Carousel wrapper -->
-          <div id="carouselDarkVariant" class="carousel product_carousel slide carousel-fade carousel-dark" data-mdb-ride="carousel">
+          <div id="carouselDarkVariant" class="carousel single-product product_carousel slide carousel-fade carousel-dark" data-mdb-ride="carousel">
             <!-- Inner -->
             <div class="carousel-inner">
               <!-- Single item -->
               @for($i=0; $i<count($images); $i++)
               <div class="carousel-item <?php if($i==0) echo 'active';?>">
-                <img src="{{asset('storage/products/'.$images[$i])}}" class="d-block w-100"
+                <img src="{{asset('storage/products/'.$images[$i])}}" class="d-block"
                   alt="Motorbike Smoke" />
               </div>
               @endfor

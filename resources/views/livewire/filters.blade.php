@@ -56,18 +56,18 @@
   <!-- Shop Sidebar End -->
   <!-- Shop Product Start -->
   <div class="col-lg-10 col-md-12">
-    <div class="row pb-3">
-      <div class="row mt-2 p-4">
+    <div class="row pt-4 products-row">
+      <div class="row ">
         @if(count($data))
         @foreach ($data as $key)
         <div class="col-lg-4 col-md-4 col-sm-12" wire:ignore wire:key="product-{{$key->id}}">
-          <div class="card mb-3" style="width: 18rem;">
+          <div class="card product-card">
             <a href="{{url('product/'.$key->id)}}">
               <livewire:image :pid="$key->id" :wire:key="$key->id">
             </a>
             <div class="card-body">
               <h5 class="card-title">{{$key->product_name}}</h5>
-              <div class="container">
+              <div class="container product-operations-btn">
                 <div class="row mb-3">
                   <div class="col-lg-7 col-md-7 col-sm-7">
                     ₨ {{$key->price}}&nbsp;<small><del>₨ {{$key->cost}}</del></small>

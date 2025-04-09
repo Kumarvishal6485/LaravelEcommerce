@@ -273,7 +273,12 @@ fieldset{
         display: block;
 }
 
-@media only screen and (max-width : 480px) {
+.single-product img{
+    display : block;
+    margin : auto;
+}
+
+@media only screen and (max-width: 480px) {
     .mycarousel {
         margin-top: 5rem;
         height: 180px !important;
@@ -297,7 +302,6 @@ fieldset{
 
     .category-row{
         padding : 0.5rem !important;
-
     }
 
     .category-images{
@@ -337,6 +341,15 @@ fieldset{
     
     .card-title, .product-card .product-price{
         text-align: center !important;
+    }    
+
+    .single-product{
+        height : 230px !important;
     }
-    
+
+    .single-product img{
+        max-height : 220px !important;
+        margin : auto;
+        vertical-align: center;
+    }
 }
