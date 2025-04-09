@@ -40,8 +40,50 @@ del {
     margin-top: 2px;
 }
 
+#category-col{
+    margin-top : 2rem;
+}
+
+.category-card{
+    width : 15rem !important;
+}
+
+.category-row{
+    padding : 4rem !important;
+}
+
 a {
     text-decoration-line: none;
+}
+
+.product-section-heading{
+    padding : 1.5rem;
+}
+
+.products-row{
+    padding : 1.5rem;
+    margin-top : .5rem;
+}
+
+.product-card{
+    width : 18rem !important;
+    height : 25rem !important;
+    margin-bottom : 1rem;
+}
+
+.product-card img{
+    height: 220px !important;
+}
+
+.product-operations-btn{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.card-title, .product-card .product-price{
+    text-align: center !important;
 }
 
 .buy-btn {
@@ -139,92 +181,162 @@ table span{
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  }
-  .quantity span{
+}
+
+.quantity span{
     width: 100%;
     text-align: center;
     font-size: 25px;
     font-weight: 500;
     cursor: pointer;
     user-select: none;
-  }
-  .quantity span .num{
+}
+
+.quantity span .num{
     font-size: 20px;
     border-right: 2px solid rgba(0,0,0,0.2);
     border-left: 2px solid rgba(0,0,0,0.2);
     pointer-events: none;
-  }
+}
 
-  .quantity .num{
+.quantity .num{
     font-size: 20px;
-  }
+}
 
-  .product-review{
+.product-review{
     display : flex;
     flex-direction: column;
     margin-top: 15px !important;
     border-bottom : 2px solid grey; 
-   }
+}
    
-   .user-details span{
+.user-details span{
         color : #666666;
         font-size : 19px !important;
-    }
-   .user-details img{
+}
+   
+.user-details img{
         height: 30px !important;
         vertical-align: bottom !important;
-   }
+}
 
-
-   .user-review span{
+.user-review span{
         color : black;
         font-size : 17px ;
         font-family : 'nunito-sans';
-   }
+}
 
-   .review-form{
+.review-form{
        padding : 14px;
        background-color : #EBECED;
        box-shadow: 0px 0px 3px;
-   }
+}
 
-   .checkout-form{
+.checkout-form{
        display: flex;
        flex-direction: column;
        gap: 30px;
-   }
+}
 
-   fieldset{
+fieldset{
         border: 1px solid #000000;
-   }
+}
 
-   .order-details{
+.order-details{
         border-left : 2px solid #777777;
         padding : 1rem;
-   }
+}
 
-   .order-container{
+.order-container{
         padding-top: 2rem;
-   }
+}
 
-   .product-link{
+.product-link{
         font-size : 23px;
-   }
+}
 
-   .ordered-product-image img{
+.ordered-product-image img{
         height: 150px;
         border : 1px solid silver;
-   }
+}
 
-   .ordered-products{
+.ordered-products{
         display : flex;
         flex-direction : row;
-   }
+}
 
-   .ordered-product-detail{
+.ordered-product-detail{
         padding : 1rem;
-   }
+}
 
-   .ordered_product_list{
+.ordered_product_list{
         display: block;
-   }
+}
+
+@media only screen and (max-width : 480px) {
+    .mycarousel {
+        margin-top: 5rem;
+        height: 180px !important;
+    }
+
+    .category {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    
+    #category-col{
+        margin-top : 2rem !important;
+    }
+
+    .category-card{
+        width : 20rem !important;
+    }
+
+    .category-row{
+        padding : 0.5rem !important;
+
+    }
+
+    .category-images{
+        width : 150px !important;
+    }
+
+    .product-section-heading{
+        padding : 1.5rem 0.5rem !important;
+    }
+
+    .products-row{
+        padding : 0rem .5rem;
+        margin-top : .3rem;
+    }
+
+    .product-card{
+        width : 20rem !important;
+        height : 24rem !important;
+        margin-bottom : 2rem; 
+    }
+
+    .product-card img{
+        height: 200px !important;
+    }
+
+    
+    .product-operations-btn .row{
+        display: flex !important;
+        flex-direction: row !important;
+        column-gap : 38px !important;
+        align-self: baseline !important;
+    }
+
+    .product-operations-btn .row div{
+        width : max-content !important;
+    }
+    
+    .card-title, .product-card .product-price{
+        text-align: center !important;
+    }
+    
+}

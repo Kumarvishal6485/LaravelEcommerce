@@ -40,7 +40,6 @@ $(document).ready(function () {
         $('#category_new_image').show();
     })
 
-
     //sub category view js starts here
     function get_category() {   //function to fetch all categories
         $.ajax({
@@ -98,7 +97,6 @@ $(document).ready(function () {
             $('#new_image').show();
         })
     })
-
     //sub category view js ends here
 
     //products view js starts here
@@ -148,7 +146,6 @@ $(document).ready(function () {
     }
 
     function display_sub_categories(cid, iscategory, data, sid) {
-        //console.log(data);
         if (iscategory) {
             var option = "<option disabled>Select</option>";
             for (let x in data) {
@@ -199,7 +196,6 @@ $(document).ready(function () {
                 'id': id
             },
             success: function (data) {
-                console.log(typeof(data['data'][0].Variations))
                 selected_product_variations(data['data'][0].Variations);
                 $('#product_iddd').val(data['data'][0].id);
                 $('#previous_product').val(data['data'][0].product_name);

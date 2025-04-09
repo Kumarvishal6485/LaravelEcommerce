@@ -41,10 +41,11 @@ class Productattr extends Component
 
     #[On('edit_product_variations')]
     public function edit_product_variations($data) {
+        $this->att_val = NULL;
         $str = $data;
         if (strlen($str) > 2) {
             $length = strlen($str) - 1;
-            $str = substr($str, 1, $length-2);
+            $str = substr($str, 1, $length-1);
             while(preg_match("/(.*?),/s", $str, $matches)) {
                 $att_val = substr($matches[0],0,strlen($matches[0])-1);
                 $str = substr($str, strlen($matches[0]), strlen($str));

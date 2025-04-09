@@ -39,13 +39,13 @@
     <!-- category component -->
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12">
-        <h3 class="p-4">Recently Arrived</h3>
+        <h3 class="product-section-heading">Recently Arrived</h3>
       </div>
     </div>
       <livewire:products/>
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12">
-        <h3 class="p-4">Trending Products</h3>
+        <h3 class="product-section-heading">Trending Products</h3>
       </div>
     </div>
     <livewire:products orderby="DESC">

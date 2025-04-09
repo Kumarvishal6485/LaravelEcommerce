@@ -19,8 +19,8 @@
     <br>
     @if (count($sel_att_val) && session()->has('attributes'))
         @foreach ($sel_att_val as $key => $val)
-        <?php 
-                $legend_created = true;
+                <?php 
+                    $legend_created = true;
                 ?>
             <fieldset>
                 @foreach ($val as $value) 

@@ -191,9 +191,7 @@ class admin extends Controller
         $data = DB::table('product')->where(array('id'=>$id))->get();
         $images = DB::table('images')->where(array('pid'=>$id))->get();
         session()->put('attributes',$data);
-        // session()->put('edit_product',true);
         $str = $data[0]->Variations;
-        
         return response()->json(array('data'=>$data,'images'=>$images,'attributesVar'=>$str));
     }
 
