@@ -211,71 +211,75 @@ table span{
 }
    
 .user-details span{
-        color : #666666;
-        font-size : 19px !important;
+    color : #666666;
+    font-size : 19px !important;
 }
    
 .user-details img{
-        height: 30px !important;
-        vertical-align: bottom !important;
+    height: 30px !important;
+    vertical-align: bottom !important;
 }
 
 .user-review span{
-        color : black;
-        font-size : 17px ;
-        font-family : 'nunito-sans';
+    color : black;
+    font-size : 17px ;
+    font-family : 'nunito-sans';
 }
 
 .review-form{
-       padding : 14px;
-       background-color : #EBECED;
-       box-shadow: 0px 0px 3px;
+   padding : 14px;
+   background-color : #EBECED;
+   box-shadow: 0px 0px 3px;
 }
 
 .checkout-form{
-       display: flex;
-       flex-direction: column;
-       gap: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 fieldset{
-        border: 1px solid #000000;
+    border: 1px solid #000000;
 }
 
 .order-details{
-        border-left : 2px solid #777777;
-        padding : 1rem;
+    border-left : 2px solid #777777;
+    padding : 1rem;
 }
 
 .order-container{
-        padding-top: 2rem;
+    padding-top: 2rem;
 }
 
 .product-link{
-        font-size : 23px;
+    font-size : 23px;
 }
 
 .ordered-product-image img{
-        height: 150px;
-        border : 1px solid silver;
+    height: 150px;
+    border : 1px solid silver;
 }
 
 .ordered-products{
-        display : flex;
-        flex-direction : row;
+    display : flex;
+    flex-direction : row;
 }
 
 .ordered-product-detail{
-        padding : 1rem;
+    padding : 1rem;
 }
 
 .ordered_product_list{
-        display: block;
+    display: block;
 }
 
 .single-product img{
     display : block;
     margin : auto;
+}
+
+#filter-button{
+    display : none;
 }
 
 @media only screen and (max-width: 480px) {
@@ -351,5 +355,21 @@ fieldset{
         max-height : 220px !important;
         margin : auto;
         vertical-align: center;
+    }
+
+    .filters{
+        display: none;
+    }
+
+    .filters center a{
+        display : none;
+    }
+    
+    #filter-button{
+        display: block;
+    }
+
+    #filter-button a{
+        cursor : pointer;
     }
 }

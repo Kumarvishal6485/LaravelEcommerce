@@ -35,6 +35,7 @@ class stripe_payment_controller extends Controller
             'return_url' => url('orders')
         ]);
     
+        dd($paymentIntent);
         if ($paymentIntent->status === 'succeeded') {
             // Store transaction details in session
             $transaction_data = [

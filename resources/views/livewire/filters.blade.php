@@ -1,7 +1,10 @@
 <div class="row" id="filter-data">
-  <div class="col-lg-2 col-md-12 border mt-3 p-2">
-    <center><h4>Filter By</h4></center>
-    <div class="">
+  <div class="col-lg-2 col-md-12 border mt-3 p-2" id="filter-button">
+    <a class="btn btn-dark">Filter By</a>
+  </div>
+  <div class="col-lg-2 col-md-12 border mt-3 p-2 filters">
+    <center id="filter-by-text"><h4>Filter By</h4></center>
+    <div>
       <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
@@ -50,7 +53,7 @@
             </div>
         </div>
     </div>
-@endforeach
+  @endforeach
     </div>
   </div>
   <!-- Shop Sidebar End -->
