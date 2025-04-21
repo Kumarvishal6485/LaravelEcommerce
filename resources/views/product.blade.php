@@ -47,7 +47,7 @@
         <div class="container options mt-4">
         <i class="far fa-heart fa-2x" onclick="add_to_wishlist({{$data[0]->id}})" ></i>
         <i class="fas fa-cart-plus fa-2x" onclick="add_to_cart({{$data[0]->id}})" ></i>
-        <a href="{{asset('buy/'.$data[0]->id)}}" class="p-2 buy-btn">Buy Now</a>
+        <a href="{{asset('buy/'.$data[0]->id)}}" wire:navigate class="p-2 buy-btn">Buy Now</a>
         </div>
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">

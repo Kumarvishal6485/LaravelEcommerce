@@ -29,7 +29,6 @@ class Filters extends Component
 
     #[Persist]
     public $attribute_selected = [];
-
     public function mount($cid = NULL, $sid = NULL, $orderby = "ASC")
     {
         $this->category = $cid;
@@ -176,7 +175,6 @@ class Filters extends Component
                 ->limit(8)
                 ->orderBy('product.addedon', $this->orderby)
                 ->get();
-                
             }
 
         return view('livewire.filters', [

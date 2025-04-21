@@ -65,6 +65,7 @@ class Cart extends Component
 
     public function render()
     {
+        
         if(session()->has('user_id')){ // for registered user
             $data = DB::table('cart')->join('product','cart.pid','=','product.id')->select('cart.pid','cart.quantity','cart.id','product.cid','product.sid','product.product_name','product.price')->where(['cart.user_id' => session('user_id')])->get();
         }

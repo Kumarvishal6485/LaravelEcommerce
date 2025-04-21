@@ -5,7 +5,14 @@
 <body>
     <x-navbar />
     <div class="container-fluid mt-5">
-        <livewire:filters cid="{{Request()->sid}}" sid="{{Request()->cid}}"/>
+    @php use Illuminate\Support\Str; @endphp
+
+<livewire:filters 
+    :cid="request()->sid" 
+    :sid="request()->cid" 
+    :key="Str::slug(request()->fullUrl())"
+/>
+
     </div>
     <!-- Shop End -->
     <x-footer/>

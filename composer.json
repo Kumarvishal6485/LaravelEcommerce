@@ -12,7 +12,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.4",
+        "livewire/livewire": "^3.6",
         "maatwebsite/excel": "^3.1",
         "phpmailer/phpmailer": "^6.9",
         "stripe/stripe-php": "^16.1"

@@ -31,13 +31,13 @@
             <input class="form-check-input" type="checkbox" wire:key="{{$product->id}}" checked>
             &nbsp;{{++$i}}
           </th>
-          <td><a href="{{url('/product/'.$product->id)}}">{{$product->product_name}}</a></td>
+          <td><a href="{{url('/product/'.$product->pid)}}" wire:navigate>{{$product->product_name}}</a></td>
           @elseif(session()->has('cart'))
           <th>
             <input class="form-check-input" type="checkbox" wire:key="{{$product->id}}" checked>
             &nbsp;{{++$i}}
           </th>
-          <td><a href="{{url('/product/'.$product->id)}}">{{$product->product_name}}</a></td>
+          <td><a href="{{url('/product/'.$product->id)}}" wire:navigate>{{$product->product_name}}</a></td>
           @endif
           <td>₨&nbsp;{{$product->price}}</td>
           @if(session()->has('user_id'))
@@ -105,7 +105,7 @@
         <tr>
           <td>
               @if($total != 0)
-                <a class="btn btn-success w-100" href="{{url('checkout')}}">Checkout</a>
+                <a class="btn btn-success w-100" href="{{url('checkout')}}" wire:navigate>Checkout</a>
               @else
                 <a class="btn btn-success w-100">Checkout</a>
               @endif

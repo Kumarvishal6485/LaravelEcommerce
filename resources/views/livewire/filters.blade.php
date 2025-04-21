@@ -69,7 +69,7 @@
               <livewire:image :pid="$key->id" :wire:key="$key->id">
             </a>
             <div class="card-body">
-              <h5 class="card-title">{{$key->product_name}}</h5>
+              <h5 class="card-title">{{ucfirst($key->product_name)}}</h5>
               <div class="container product-operations-btn">
                 <div class="row mb-3">
                   <div class="col-lg-7 col-md-7 col-sm-7">

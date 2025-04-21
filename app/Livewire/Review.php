@@ -12,9 +12,8 @@ class Review extends Component
     public $review_text = "";
     public $rating = 5;
     public $pid;
-    public function submit_review_data($pid){
-        $this->pid = $pid;
-        DB::table('review')->insert(['review_text'=>$this->review_text , 'pid'=>$pid , 'rating'=>$this->rating]);
+    public function submit_review_data(){
+        DB::table('review')->insert(['review_text'=>$this->review_text , 'pid'=>$this->pid , 'rating'=>$this->rating]);
     }
 
     public function render()

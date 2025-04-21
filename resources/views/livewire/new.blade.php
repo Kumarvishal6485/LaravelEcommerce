@@ -50,7 +50,7 @@
         @foreach ($data as $key)
         <div class="col-lg-4 col-md-4 col-sm-12" wire:ignore wire:key="product-{{$key->id}}">
           <div class="card mb-3" style="width: 18rem;">
-            <a href="{{url('product/'.$key->id)}}">
+            <a href="{{url('product/'.$key->id)}}" wire:navigate>
               <livewire:image :pid="$key->id" :wire:key="$key->id">
             </a>
             <div class="card-body">
@@ -61,7 +61,7 @@
                     ₨ {{$key->price}}&nbsp;<small><del>₨ {{$key->cost}}</del></small>
                   </div>
                   <div class="col-lg-5 col-md-5 col-sm-5">
-                    <a class="p-2 mb-2 buy-btn" href="buy/{{$key->id}}">Buy Now</a>
+                    <a class="p-2 mb-2 buy-btn" href="buy/{{$key->id}}" >Buy Now</a>
                   </div>
                 </div>
                 <div class="row">

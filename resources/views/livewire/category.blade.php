@@ -3,7 +3,7 @@
       @foreach($data as $key)
       <div class="col-lg-3" id="category-col">
         @if($type == "category")
-        <a href="{{url('sub_categories/'.$key->id)}}">
+        <a href="{{url('sub_categories/'.$key->id)}}" wire:navigate>
           <div class="card category-card">
           <div class="card-body category">  
           <img src="storage/{{$key->image}}" class="category-images">
@@ -11,7 +11,7 @@
           </div>
         </div>
         @else
-          <a href="{{url('products/'.$key->id.'/'.$id)}}">
+          <a href="{{url('products/'.$key->id.'/'.$id)}}" wire:navigate>
             <div class="card category-card">
               <div class="card-body category">  
                 <img src="../storage/sub_category/{{$key->image}}" class="category-images">

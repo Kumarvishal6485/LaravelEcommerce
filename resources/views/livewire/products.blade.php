@@ -2,7 +2,7 @@
   @foreach ($data as $key)
     <div class="col-lg-3 col-md-4 col-sm-12" wire:ignore wire:key="product-{{$key->id}}">
         <div class="card product-card">
-            <a href="{{url('product/'.$key->id)}}"><livewire:image :pid="$key->id" :wire:key="$key->id"></a>
+            <a href="{{url('product/'.$key->id)}}" wire:navigate><livewire:image :pid="$key->id" :wire:key="$key->id"></a>
           <div class="card-body">
             <h5 class="card-title">{{$key->product_name}}</h5>
             <div class="container product-operations-btn">
@@ -11,7 +11,7 @@
                   ₨ {{$key->price}}&nbsp;<small><del>₨ {{$key->cost}}</del></small>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-8">
-                  <a class="p-2 mb-2 buy-btn" href="{{url('buy/'.$key->id)}}">Buy Now</a>
+                  <a class="p-2 mb-2 buy-btn" href="{{url('buy/'.$key->id)}}" wire:navigate>Buy Now</a>
                 </div>
               </div>
               <div class="row">
