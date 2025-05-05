@@ -8,6 +8,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class login extends Controller
 {
+    //method to redirect on the different panel (admin / website)
     function login(Request $r){
         if(session()->has('username')){
             return redirect('admin/index');
@@ -15,15 +16,17 @@ class login extends Controller
         return view('admin/login');
     }
 
+    // admin logout
     function logout(Request $r){
         session()->forget('username');
         if(session()->has('user_id')){
+            session()->put("msg",["Logged Out Successfully","success"]);
             session()->forget('user_id');
         }
-        session()->flash('error','Access Denied');
         return redirect('admin');
     }
     
+    // admin login
     function check_admin(Request $r){
         $username = $r['username'];
         $password = $r['password'];
@@ -35,6 +38,8 @@ class login extends Controller
         return view('admin/login');
     }
     
+
+    //user login
     function check_users(Request $r){
         $username = $r['username'];
         $password = $r['password'];
@@ -43,6 +48,7 @@ class login extends Controller
         if(isset($data[0]->username)){
             session()->put('user_id',$id[0]->id);
             session()->put('username',$username);
+            session()->put("msg",["Logged In Successfully","success"]);
             if(session()->has('cart')){
                 $cart_data = session()->get('cart');
                 foreach($cart_data as $key => $value){
@@ -55,12 +61,18 @@ class login extends Controller
             }
             session()->forget('cart');
         }
+        else {
+            session()->put("msg",["Login Required","error"]);    
+        }
         return back();
     }
+
+    // socialite driver
     function googlelogin(Request $r){
         return Socialite::driver('google')->redirect();
     }
 
+    // google login
     function googleLoginHandler(Request $r){
         $user = Socialite::driver('google')->user();
         $data = DB::table('admin')->where(array('username'=>$user->email ,'active_status' => 1 , 'type' => 'U'))->get();
@@ -70,6 +82,7 @@ class login extends Controller
         $id = DB::table('admin')->where(array('username'=>$user->email ,'active_status' => 1 , 'type' => 'U'))->select('id')->get();
         session()->put('user_id',$id[0]->id);
         session()->put('username',$user->email);  
+        session()->put("msg",["Logged In Successfully","success"]);
         if(session()->has('cart')){
             $cart_data = session()->get('cart');
             foreach($cart_data as $key => $value){
@@ -84,14 +97,13 @@ class login extends Controller
         return redirect('/');
     }
 
+    // user logout
     function logout_user(Request $r){
         session()->forget('username');
         if(session()->has('user_id')){
-            session()->forget('user_id');
+            session()->flush();
+            session()->put("msg",["Logged Out Successfully","success"]);
         }
-        session()->flush();
-        session()->flash('error','Access Denied');
         return redirect('/');
     }
-
 }

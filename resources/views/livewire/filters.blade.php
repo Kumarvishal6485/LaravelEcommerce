@@ -65,7 +65,7 @@
         @foreach ($data as $key)
         <div class="col-lg-4 col-md-4 col-sm-12" wire:ignore wire:key="product-{{$key->id}}">
           <div class="card product-card">
-            <a href="{{url('product/'.$key->id)}}">
+            <a href="{{url('product/'.$key->id)}}" wire:navigate>
               <livewire:image :pid="$key->id" :wire:key="$key->id">
             </a>
             <div class="card-body">

@@ -19,7 +19,6 @@ class admin_auth
         if(!$request->session()->has('username')){
             return redirect('admin');
         }
-
         return $next($request);
     }
 }

@@ -1,3 +1,10 @@
+@if (session()->has('msg'))
+  <livewire:Alert type="{{session()->get('msg')[1]}}" msg="{{session()->get('msg')[0]}}">
+  @php
+  session()->forget('msg')
+  @endphp
+@endif
+  
 <!-- Footer -->
 @livewireScripts
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
@@ -51,8 +58,7 @@
               <i class="fas fa-gem me-3"></i>Ecommerce
             </h6>
             <p>
-              Here you can use rows and columns to organize your footer content. Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit.
+              An Ecommerce Website , developed for showcasing my Development Skills only.
             </p>
           </div>
           <!-- Grid column -->
@@ -61,19 +67,16 @@
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">
-              Products
+             Quick links
             </h6>
             <p>
-              <a href="#!" class="text-reset">Angular</a>
+              <a href="{{url('/')}}" class="text-reset">Home</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">React</a>
+              <a href="{{url('/products')}}" class="text-reset">Shop</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Vue</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">Laravel</a>
+              <a href="{{url('/cart')}}" class="text-reset">Cart</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -82,19 +85,16 @@
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">
-              Useful links
+              
             </h6>
             <p>
-              <a href="#!" class="text-reset">Pricing</a>
+              <a href="#" class="text-reset">Pricing</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Settings</a>
+              <a href="#" class="text-reset">Orders</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Orders</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">Help</a>
+              <a href="#" class="text-reset">Help</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -103,10 +103,10 @@
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-            <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+            <p><i class="fas fa-home me-3"></i> Delhi , INDIA</p>
             <p>
               <i class="fas fa-envelope me-3"></i>
-              info@example.com
+              kumarvishal@gmail.com
             </p>
             <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
             <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>

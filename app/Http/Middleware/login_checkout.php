@@ -16,7 +16,7 @@ class login_checkout
     public function handle(Request $request, Closure $next): Response
     {
         if(!$request->session()->has('username')){
-            session()->put('message','Login Required!');
+            session()->put("msg",["Login Required","error"]);
             return back();
         }
         else{

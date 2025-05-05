@@ -12,7 +12,7 @@
           <a class="nav-link active" aria-current="page" href="/" wire:navigate>Home</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{{url('products')}}" wire:navigate>Shop</a>
+        <a class="nav-link active" aria-current="page" href="{{url('products')}}">Shop</a>
         </li>
         <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="{{url('cart')}}" wire:navigate>Cart</a>
