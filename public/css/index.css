@@ -282,6 +282,10 @@ fieldset{
     display : none;
 }
 
+.error-msg{
+    color : #d60d0d;
+}
+
 @media only screen and (max-width: 480px) {
     .mycarousel {
         margin-top: 5rem;

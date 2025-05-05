@@ -20,6 +20,19 @@ class Checkout extends Component
     public $country = "";
     public $pincode = "";
 
+    protected $rules = [
+        'name' => 'required|max:20',
+        'email' => ['required','email'],
+        'alternate_phone' => ['nullable','numeric'],
+        'phone' => ['required', 'numeric'],
+        'house_no' => ['required','numeric'],
+        'street' => ['required'],
+        'state' => ['required'],
+        'city' => ['required'],
+        'country' => ['required'],
+        'pincode' => ['required','numeric']
+    ];
+
     public function mount($pid = null, $name = null, $email = null, $phone = null, $alternate_phone = null, $house_no = null, $street = null, $state = null, $city = null, $country = null, $pincode = null) {
         $this->name = $name ?? $this->name;
         $this->phone = $phone ?? $this->phone;
@@ -39,7 +52,13 @@ class Checkout extends Component
         }
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName,$this->rules);
+    }
+
     public function submitOrder() {
+        $this->validate($this->rules);
         $user_data = [
             'name' => $this->name,
             'email' => $this->email,
