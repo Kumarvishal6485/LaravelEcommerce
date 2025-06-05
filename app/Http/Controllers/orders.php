@@ -39,7 +39,7 @@ class orders extends Controller
             $id = DB::table('orders')->insertGetId([
                 'amount' => $transaction_data['amount'],
                 'reference_id' => $transaction_data['reference_id'],
-                'status' => $transaction_data['status'],
+                'payment_status' => $transaction_data['status'],
                 'gateway_created_time' => $transaction_data['created_at'],
                 'uid' => $uid,
                 'item_ordered' => $items_ordered
@@ -56,6 +56,7 @@ class orders extends Controller
                 DB::table('contact_details')->insert([
                     'user_id' => $uid,
                     'oid' => $id,
+                    'email' => $checkout_detail['email'],
                     'phone' => $checkout_detail['phone'],
                     'alternate_phone' => $checkout_detail['alternate_phone'] == "" ? $checkout_detail['phone'] : $checkout_detail['alternate_phone'],
                     'house_no' => $checkout_detail['house_no'],
@@ -90,12 +91,20 @@ class orders extends Controller
                 DB::table('cart')->where('user_id',$uid)->delete();
             }
             DB::commit();
-            mailer::sendMail();
+            if (session('username') != $checkout_detail['email']) {
+                $userEmails = [session('username'), $checkout_detail['email']];
+            } else {
+                $userEmails = [session('username')];
+            }
+            $orderMailSubject = "Order Placed Successfully";
+            mailer::sendMail($userEmails, $orderMailSubject);               //Send Order Placed
             Request()->session()->forget('transaction');
             return redirect('orders/'.$id);
         }
+        
         catch(Exception $e){
             DB::rollback();
+            mailer::sendMail($userEmail, $orderMailSubject);               //Send Order failed mail
             echo $e->getMessage();
         }
     }
@@ -114,7 +123,7 @@ class orders extends Controller
     public function show(string $id)
     {
         //
-        $data = DB::table('orders')->join('ordered_product_details','orders.id','=','ordered_product_details.order_id')->join('user_details','orders.id','=','user_details.order_id')->join('contact_details','orders.id','=','contact_details.oid')->where(['orders.id' => $id])->select('orders.id','orders.amount','orders.reference_id','orders.gateway_created_time','ordered_product_details.pid','ordered_product_details.quantity','user_details.name','contact_details.phone','contact_details.alternate_phone','contact_details.house_no','contact_details.street','contact_details.state','contact_details.city','contact_details.pincode','contact_details.country')->get();
+        $data = DB::table('orders')->join('ordered_product_details','orders.id','=','ordered_product_details.order_id')->join('user_details','orders.id','=','user_details.order_id')->join('contact_details','orders.id','=','contact_details.oid')->where(['orders.id' => $id, 'orders.uid'=> session('user_id')])->select('orders.id','orders.amount','orders.reference_id','orders.gateway_created_time','ordered_product_details.pid','ordered_product_details.quantity','user_details.name','contact_details.phone','contact_details.alternate_phone','contact_details.house_no','contact_details.street','contact_details.state','contact_details.city','contact_details.pincode','contact_details.country')->get();
         return view('order',['data' => $data , 'oid' => $id]);
     }
 

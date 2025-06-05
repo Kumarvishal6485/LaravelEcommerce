@@ -16,6 +16,10 @@ class login extends Controller
         return view('admin/login');
     }
 
+    public static function getUserId() {
+        return session('user_id');
+    }
+
     // admin logout
     function logout(Request $r){
         session()->forget('username');
@@ -33,8 +37,10 @@ class login extends Controller
         $data = DB::table('admin')->where(array('username'=>$username,'password'=>$password , 'type' => 'A' , 'active_status' => 1))->get();
         if(isset($data[0]->username)){
             session()->put('username',$username);
+            session()->put('user_id',$data[0]->id);
             return redirect('admin/index');
         }
+
         return view('admin/login');
     }
     

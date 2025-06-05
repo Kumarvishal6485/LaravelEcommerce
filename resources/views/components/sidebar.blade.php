@@ -28,6 +28,7 @@
         <li><a href="{{url('admin/sub_categories')}}">Sub Categories</a></li>
         <li><a href="{{url('admin/attributes')}}">Attributes</a></li>    
         <li><a href="{{url('admin/products')}}">Products</a></li>
+        <li><a href="{{url('admin/orders')}}">Orders</li>
         <li><a href="{{url('admin/users')}}">Users</a></li>
     </ul>
 </div>

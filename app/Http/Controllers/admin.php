@@ -221,4 +221,10 @@ class admin extends Controller
         }
         return redirect('admin/products');   
     }
+
+    function getOrders(Request $r)
+    {
+        $orders = DB::table('orders')->select('id','amount','payment_status','order_status','uid','created_at')->paginate(10);
+        return view('admin/orders',['orders'=>$orders]);
+    }
 }

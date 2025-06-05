@@ -35,8 +35,7 @@ class stripe_payment_controller extends Controller
             'return_url' => url('orders')
         ]);
     
-        dd($paymentIntent);
-        if ($paymentIntent->status === 'succeeded') {
+        // if ($paymentIntent->status === 'succeeded') {
             // Store transaction details in session
             $transaction_data = [
                 'amount' => $paymentIntent->amount,
@@ -49,8 +48,8 @@ class stripe_payment_controller extends Controller
     
             // Redirect to order creation page after successful payment
             return redirect('orders/create');
-        } else {
-            return back()->with('error', 'Payment failed! Try again.');
-        }
+        // } else {
+        //     return back()->with('error', 'Payment failed! Try again.');
+        // }
     }    
 }

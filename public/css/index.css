@@ -286,6 +286,10 @@ fieldset{
     color : #d60d0d;
 }
 
+/* #chat-form{
+    display:none !important;
+} */
+
 @media only screen and (max-width: 480px) {
     .mycarousel {
         margin-top: 5rem;

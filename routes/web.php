@@ -10,6 +10,7 @@ use App\http\controllers\orders;
 use App\http\controllers\attributes;
 use livewire\livewire;
 
+
 //admin panel routes starts from here
 Route::get('admin',[login::class,'login']);
 Route::post('check_user',[login::class,'check_admin']);
@@ -41,6 +42,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/attributes',[attributes::class,'fetchAttributes']);
     Route::get('admin/add_attribute',[attributes::class,'addAttribute']);
     Route::get('admin/remove_att_val/{id}',[attributes::class,'removeAttributeValue']);
+    Route::get('admin/orders',[admin::class,'getOrders']);
 });
 //admin panel routes ends here
 
