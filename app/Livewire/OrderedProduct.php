@@ -18,7 +18,7 @@ class OrderedProduct extends Component
         if($this->order_id) {
             $data = DB::table('ordered_product_details')->join('product','product.id','=','ordered_product_details.pid')->join('orders','ordered_product_details.order_id','=','orders.id')->where(['ordered_product_details.order_id' => $this->order_id, 'orders.uid' => $this->user_id])->select('ordered_product_details.pid','ordered_product_details.quantity','ordered_product_details.price','product.id','product.product_name')->get();
         } else {
-            $data = DB::table('orders')->join('ordered_product_details','orders.id','=','ordered_product_details.order_id')->join('product','ordered_product_details.pid','=','product.id')->where('orders.uid','=',$this->user_id)->select('orders.id as oid','orders.item_ordered','product.product_name','product.id','orders.created_at')->distinct()->get();
+            $data = DB::table('orders')->join('ordered_product_details','orders.id','=','ordered_product_details.order_id')->join('product','ordered_product_details.pid','=','product.id')->where('orders.uid','=',$this->user_id)->select('orders.id as oid','orders.item_ordered','product.product_name','product.id','orders.created_at')->orderby('orders.created_at','desc')->get();
         }
         return view('livewire.ordered-product',[
             'data' => $data , 

@@ -262,7 +262,7 @@ fieldset{
 
 .ordered-products{
     display : flex;
-    flex-direction : row;
+    flex-direction : column;
 }
 
 .ordered-product-detail{
@@ -289,6 +289,25 @@ fieldset{
 /* #chat-form{
     display:none !important;
 } */
+
+.order-specific{
+    display : flex;
+}
+
+.order-all .row {
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
+    padding : 10px 0px;
+}
+
+.order-all{
+    display : flex;
+    flex-direction : column;
+    gap: 2rem;
+}
+
+#get-support {
+    cursor : pointer !important;
+}
 
 @media only screen and (max-width: 480px) {
     .mycarousel {

@@ -1,34 +1,66 @@
-<div class="col-lg-6 ordered-products">
-    @if (count($data))
-        @if($data && $type === "current_order")
-            @foreach($data as $product)
-                <div class="ordered-product-image">
-                    <livewire:image :pid="$product->id" :wire:key="$product->id">
+@if (count($data))
+    @if ($data && $type === 'current_order')
+        <div class="col-lg-6 ordered-products">
+            <div class="row">
+                <div class="col-lg-11 col-md-11">
                 </div>
-                <div class="ordered-product-detail">
-                    <a class="product-link" href="{{url('product/'.$product->id)}}">{{$product->product_name}}</a><br>
-                    {{$product->price}} ₨<br>
-                    Quantity : <button class="btn btn-light" disabled>{{$product->quantity}}</button><br>
-                    <a class="btn btn-warning" id="get-support" order_id="{{$order_id}}">Get Product Support</a>
-                    <a class="btn btn-dark" href="{{url('write-review')}}">Write Product Review</a>
-                    <livewire:chat order_id="{{$order_id}}"/>
+                <div class="col-lg-1 col-md-1 p-1">
+                    <div class="dropdown">
+                      <button class="btn btn-light" data-bs-toggle="dropdown" aria-expanded="false">
+                        &#8942;
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" id="get-support" order_id="{{ $order_id }}">Get Product Support</a></li>
+                        <li><a class="dropdown-item" href="{{ url('write-review') }}">Write Product Review</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+            @foreach ($data as $product)
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 order-specific">
+                        <div class="ordered-product-image">
+                            <livewire:image :pid="$product->id" :wire:key="$product->id">
+                        </div>
+                        <div class="ordered-product-detail">
+                            <a class="product-link" href="{{ url('product/' . $product->id) }}">{{ $product->product_name }}</a><br>
+                            {{ $product->price }} ₨<br>
+                            Quantity : <button class="btn btn-light" disabled>{{ $product->quantity }}</button><br>
+                        </div>
+                    </div>
                 </div>
             @endforeach
-        @endif
-        @if($data && $type === "all_orders")
-            @foreach($data as $product)
-            <a href="{{url('orders/'.$product->oid)}}">
-                <div class="ordered-product-image">
-                    <livewire:image :pid="$product->id" :wire:key="$product->id">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <livewire:chat order_id="{{ $order_id }}"/>
                 </div>
-                <div class="ordered-product-detail">  
-                    <p><a class="product-link" href="{{url('orders/'.$product->oid)}}">{{$product->product_name}}</a></p>
-                    <span>{{$product->created_at}}</span>
-                </div>
-            </a>
-            @endforeach
-        @endif
-    @else 
-        <h3>Order Fetch Request Failed! Try Again Later.</h3>
+            </div>
+        </div>
     @endif
-</div>
+
+    @if ($data && $type === 'all_orders')
+        <div class="col-lg-12 col-md-12 ordered-products">
+            <div class="container order-all">
+                @foreach ($data as $product)
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 order-specific">
+                            <a href="{{ url('orders/' . $product->oid) }}">
+                                <div class="ordered-product-image">
+                                    <livewire:image :pid="$product->id" :wire:key="$product->id">
+                                </div>
+                                <div class="ordered-product-detail">
+                                    <p><a class="product-link"
+                                            href="{{ url('orders/' . $product->oid) }}">{{ $product->product_name }}</a>
+                                    </p>
+                                    <span>{{ $product->created_at }}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+    @endif
+@else
+    <h3>Order Fetch Request Failed! Try Again Later.</h3>
+    </div>
+@endif
