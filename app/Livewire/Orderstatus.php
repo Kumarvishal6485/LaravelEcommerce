@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Events\OrderStatusChanged;
 use Livewire\Attributes\On;
 use App\Events\MessageSent;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Orderstatus extends Component
 {
@@ -15,14 +17,14 @@ class Orderstatus extends Component
     var $orderStatuses = ["Order Placed","Cancelled","Shipped","Out For Delivery","Delivered"];
     var $sender_id = "";
     var $receiver_id;
+    var $messages = [];
 
     public function mount($status, $order_id, $user_id)
     {
         $this->status = $status;
         $this->order_id = $order_id;
         $this->user_id = $user_id;
-        $this->sender_id = session('user_id');
-        $this->receiver_id = 12;
+        $this->sender_id = Auth::id();
     }
 
     public function statusChanged($index)
@@ -35,13 +37,25 @@ class Orderstatus extends Component
             "order_id" => $this->order_id,
             "message" => $this->status
         ];
+        DB::table('orders')->where(['id' => $this->order_id])->update(['order_status' => $this->status]);
         event(new OrderStatusChanged($status_notif));
     }
 
-    #[On('echo-private:msg-received.{sender_id},MessageSent')]
+    public function getListeners()
+    {
+        if (Auth::check()) {
+            $sender_id = Auth::id();
+            return [
+                "echo-private:msg-received.{$sender_id},MessageSent" => 'listen'
+            ];
+        }
+
+        return [];
+    }
+
     public function listen($data)
     {
-        $this->messages = [...$this->messages, $data->notifData['message']];
+        $this->messages = [...$this->messages, $data['message']['message']];
     }
 
     public function render()

@@ -9,4 +9,5 @@ $(document).ready(function (){
     $('#get-support').click(function(e){
         $('#chat-form').show();
     })
+
 })

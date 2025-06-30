@@ -32,7 +32,8 @@ class stripe_payment_controller extends Controller
             'customer' => $customerId,
             'payment_method' => 'pm_card_visa',
             'confirm' => true,
-            'return_url' => url('orders')
+            'return_url' => 'http://127.0.0.1:8000/orders',
+            'next_action' => null
         ]);
     
         // if ($paymentIntent->status === 'succeeded') {

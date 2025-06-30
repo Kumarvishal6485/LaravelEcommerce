@@ -10,7 +10,6 @@ use App\http\controllers\orders;
 use App\http\controllers\attributes;
 use livewire\livewire;
 
-
 //admin panel routes starts from here
 Route::get('admin',[login::class,'login']);
 Route::post('check_user',[login::class,'check_admin']);
@@ -47,6 +46,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
 //admin panel routes ends here
 
 //website route starts
+Route::Post('/createUser',[login::class,'createUser'])->name('submit_signup_form');
 Route::get('/googlelogin',[login::class,'googlelogin']);
 Route::get('/auth/google/callback',[login::class,'googleLoginHandler']);
 Route::post('/check_users',[login::class,'check_users'])->name('submit_login_form');

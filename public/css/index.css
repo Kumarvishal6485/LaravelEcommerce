@@ -309,6 +309,22 @@ fieldset{
     cursor : pointer !important;
 }
 
+#notification-count {
+    position: absolute;
+    top: -7px;
+    right: -8px;
+    font-size: 12px;
+    background: #DBBB10;
+    padding: 3px;
+    z-index: -1;
+    color: #f7f7f7;
+    border-radius: 20px;
+}
+
+.dropdown-menu {
+    right : 0px;
+}
+
 @media only screen and (max-width: 480px) {
     .mycarousel {
         margin-top: 5rem;

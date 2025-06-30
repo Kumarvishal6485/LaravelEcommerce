@@ -1,4 +1,4 @@
-<span class="d-flex w-50">
+<span class="d-flex w-25">
     <input wire:model.live="search" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">    
         @if($this->get_result != NULL)
         <div class="search-items w-25">
