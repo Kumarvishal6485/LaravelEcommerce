@@ -22,6 +22,23 @@ class orders extends Controller
     }
 
     /**
+     * note: 
+     * step = 1 => Order Placed
+     * step = 2 => Shipped
+     * step = 3 => Out For Delivery
+     * step = 4 => Delivered
+     * step = 5 => Cancelled
+     */
+    public function getStatusXML() {
+        $xml = new \SimpleXMLElement("<?xml version='1.0' encoding='UTF-8'?><OrderDetails></OrderDetails>");
+        $orderStatus = $xml->addChild("orderStatus");
+        $orderStatus->addAttribute("status","Order Placed");
+        $orderStatus->addAttribute("create_at",Date(DATE_ATOM));
+        $orderStatus->addAttribute("step",1); 
+        return $xml->asXML();
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -36,13 +53,15 @@ class orders extends Controller
 
             $items_ordered = (count($cart_data) == 0) ? 1 : count($cart_data);
 
+            $orderStatus = $this->getStatusXML();   // function call to get status xml
             $id = DB::table('orders')->insertGetId([
                 'amount' => $transaction_data['amount'],
                 'reference_id' => $transaction_data['reference_id'],
                 'payment_status' => $transaction_data['status'],
                 'gateway_created_time' => $transaction_data['created_at'],
                 'uid' => $uid,
-                'item_ordered' => $items_ordered
+                'item_ordered' => $items_ordered,
+                'order_status' => $orderStatus
             ]);
 
             if($transaction_data && $transaction_data['status']){
@@ -97,7 +116,7 @@ class orders extends Controller
                 $userEmails = [session('username')];
             }
             $orderMailSubject = "Order Placed Successfully";
-            mailer::sendMail($userEmails, $orderMailSubject);               //Send Order Placed
+            // mailer::sendMail($userEmails, $orderMailSubject);               //Send Order Placed
             Request()->session()->forget('transaction');
             return redirect('orders/'.$id);
         }

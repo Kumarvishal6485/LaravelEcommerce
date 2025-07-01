@@ -32,7 +32,7 @@
                     {{$data[0]->country}} , {{$data[0]->pincode}} 
                   </div>
                 @endif
-              @elseif(isset($uid))
+              @elseif (isset($uid))
               <livewire:ordered-product/>
               @endif
           </div>

@@ -34,7 +34,7 @@
             <td>{{$key->uid}}</td>
             <td>{{$key->amount}}</td>
             <td>{{$key->payment_status}}</td>
-            <td><livewire:orderstatus status="{{$key->order_status}}" order_id="{{$key->id}}" user_id="{{$key->uid}}" key:id="{{$key->id}}"/></td>
+            <td><livewire:order-status status="{{$key->order_status}}" order_id="{{$key->id}}" user_id="{{$key->uid}}" key:id="{{$key->id}}"/></td>
             <td>{{$key->created_at}}</td>
           </tr>
           @endforeach

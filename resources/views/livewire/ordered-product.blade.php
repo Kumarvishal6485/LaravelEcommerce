@@ -16,6 +16,10 @@
                     </div>
                 </div>
             </div>
+            @php
+                $items = count($data);
+                $iteration = 0;
+            @endphp
             @foreach ($data as $product)
                 <div class="row">
                     <div class="col-lg-12 col-md-12 order-specific">
@@ -28,6 +32,14 @@
                             Quantity : <button class="btn btn-light" disabled>{{ $product->quantity }}</button><br>
                         </div>
                     </div>
+                    @if ($items - 1 == $iteration)
+                        <div class="order-status">
+                            <livewire:status-button order_status="{{$product->order_status}}"/>
+                        </div>
+                    @endif
+                    @php
+                        $iteration++;
+                    @endphp
                 </div>
             @endforeach
             <div class="row">
@@ -53,14 +65,17 @@
                                             href="{{ url('orders/' . $product->oid) }}">{{ $product->product_name }}</a>
                                     </p>
                                     <span>{{ $product->created_at }}</span>
+                                    <livewire:status-button order_status="{{$product->order_status}}"/>
                                 </div>
                             </a>
                         </div>
                     </div>
                 @endforeach
             </div>
+        </div>
     @endif
 @else
-    <h3>Order Fetch Request Failed! Try Again Later.</h3>
+    <div>
+        <h3>Order Fetch Request Failed! Try Again Later.</h3>
     </div>
 @endif

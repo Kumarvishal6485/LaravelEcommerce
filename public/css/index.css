@@ -325,6 +325,10 @@ fieldset{
     right : 0px;
 }
 
+.order-status {
+    padding : 15px;
+}
+
 @media only screen and (max-width: 480px) {
     .mycarousel {
         margin-top: 5rem;

@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 use App\Events\MessageSent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\XmlStatusParser;
 
 class Orderstatus extends Component
 {
@@ -18,14 +19,25 @@ class Orderstatus extends Component
     var $sender_id = "";
     var $receiver_id;
     var $messages = [];
-
+    var $statusXml;
     public function mount($status, $order_id, $user_id)
     {
-        $this->status = $status;
+        $this->statusXml = $status;
+        $this->status = $this->getStatusDetail($status);
         $this->order_id = $order_id;
         $this->user_id = $user_id;
         $this->sender_id = Auth::id();
     }
+
+    private function getStatusDetail($status) {
+        $parsedStatusData = XmlStatusParser::parser($status);
+        if ($parsedStatusData) {
+            $data = array_pop($parsedStatusData);
+            return $data['status'];
+        }
+        return "";
+    }
+
 
     public function statusChanged($index)
     {
@@ -37,7 +49,8 @@ class Orderstatus extends Component
             "order_id" => $this->order_id,
             "message" => $this->status
         ];
-        DB::table('orders')->where(['id' => $this->order_id])->update(['order_status' => $this->status]);
+        $this->statusXml = XmlStatusParser::updateXml($this->statusXml, $this->status);
+        DB::table('orders')->where(['id' => $this->order_id])->update(['order_status' => $this->statusXml]);
         event(new OrderStatusChanged($status_notif));
     }
 
@@ -49,7 +62,6 @@ class Orderstatus extends Component
                 "echo-private:msg-received.{$sender_id},MessageSent" => 'listen'
             ];
         }
-
         return [];
     }
 
