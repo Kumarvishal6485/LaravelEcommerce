@@ -51,6 +51,7 @@ class Orderstatus extends Component
         ];
         $this->statusXml = XmlStatusParser::updateXml($this->statusXml, $this->status);
         DB::table('orders')->where(['id' => $this->order_id])->update(['order_status' => $this->statusXml]);
+        DB::table('notifications')->insert(['sender' => $this->sender_id, 'receiver' => $this->user_id, 'message' => $this->status, 'order_id' => $this->order_id]);
         event(new OrderStatusChanged($status_notif));
     }
 
